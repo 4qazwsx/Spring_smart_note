@@ -17,7 +17,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>	
-	<context:component-scan base-package="oracle.java.oMybatis3" />	
+	<context:component-scan base-package="oracle.java.note" />	
 	<!-- <context:component-scan base-package="controller,service,dao" /> -->	
 	
 	<!--       File Upload Bean  Setting    -->
@@ -28,14 +28,5 @@
     <beans:bean id="uploadPath"  class="java.lang.String">
         <beans:constructor-arg value="C:\\log\\upload"></beans:constructor-arg>
     </beans:bean>
-    
-    <beans:bean id="sampleInterceptor" class="oracle.java.oMybatis3.service.SampleIntercepter"></beans:bean>
-    <interceptors>
-    	<interceptor>
-    		<mapping path="/interCepter.do"/>
-    		<beans:ref bean="sampleInterceptor"/>
-    	</interceptor>
-    </interceptors>
-	
 
 </beans:beans>
