@@ -5,10 +5,49 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>대필노트</title>
+<style type="text/css">
+
+#schedule_table tr{
+	height: 100px;
+}
+
+</style>
+
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+
+var line = 0;
+
+function linePlus(){
+	//alert(line);
+	
+	if(line < 15) {
+		line++;
+		var trTd = $("<tr id='schedule_line_"+line+"'><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+		$("#schedule_table").append(trTd);
+	}
+	else alert("시간표가 너무 길어집니다.")
+	
+}
+
+function lineMinus(){
+	//alert(line);
+	$("#schedule_line_"+line).remove();
+	if(line > 0) line--;
+	
+}
+
+	
+</script>
 </head>
 <body>
-<table border="1px" width="100%">
+<table border="1px" width="80%" id="schedule_table">
+	<tr>
+		<td id="linePlusButton" onclick="linePlus()">+</td>
+		<td id="lineMinusButton" onclick="lineMinus()">-</td>
+	</tr>
 	<tr>
 		<td>월</td>
 		<td>화</td>
@@ -18,8 +57,8 @@
 		<td>토</td>
 		<td>일</td>
 	</tr>
-	<tr height="800px">
-		<td>
+	<tr height="200px" id="schedule_line_0">
+		<td bgcolor="${param.color })">
 			<%-- <c:if test="${sub.day == 0}"> --%>
 			<c:if test="${param.day == 0}">
 				<tr><td></td></tr>
