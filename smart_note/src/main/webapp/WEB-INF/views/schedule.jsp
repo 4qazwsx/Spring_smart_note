@@ -61,10 +61,6 @@ function lineMinus(){
 		<td bgcolor="${param.color })">
 			<%-- <c:if test="${sub.day == 0}"> --%>
 			<c:if test="${param.day == 0}">
-				<tr><td></td></tr>
-				<c:forEach begin="0" end="10">
-				
-				</c:forEach>
 			</c:if>
 		</td>
 		<td></td>
