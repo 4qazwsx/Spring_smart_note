@@ -106,6 +106,12 @@ public String header(Model model) {
 	return "header";
 }
 
+@RequestMapping(value="header1")
+public String header1(Model model) {
+	System.out.println("Start header Form");
+	return "header1";
+}
+
 
 @RequestMapping(value="loginPro")
 public String loginPro(HttpServletRequest request,YJ_Members members, Model model) {

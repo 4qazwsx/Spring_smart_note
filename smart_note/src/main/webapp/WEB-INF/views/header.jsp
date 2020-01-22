@@ -118,7 +118,7 @@ header a:active{color: black; text-decoration: none;}
 }
 #header_center{
 	margin-top: 0px; 
-	background-color: #E55151;
+	background-color: #FFBB00;
 	border-bottom: 2px solid #d5d5d5;
 	/* height: 72px; */
 }
@@ -170,7 +170,7 @@ header a:active{color: black; text-decoration: none;}
 }
 .menu_bar_table{
 	text-align: center;
-	background-color: #E55151;
+	background-color: #FFBB00;
 	color: white;
 	border-spacing: 0px;
 }
@@ -183,7 +183,7 @@ header a:active{color: black; text-decoration: none;}
 }
 .menu_bar_table td:first-child{
 	padding: 15px 30px 15px 30px;
-	background-color: #D34747;
+	background-color: #FFBB00;
 	font-size: 30px;
 	font-weight: bold;
 }
