@@ -16,7 +16,7 @@
 //response.sendRedirect("writeDeptIn.do");
 //response.sendRedirect("insertEmp.do");
 //response.sendRedirect("interCepterForm.do");
-response.sendRedirect("loginForm2.do");
+response.sendRedirect("main.do");
 
 %>
 

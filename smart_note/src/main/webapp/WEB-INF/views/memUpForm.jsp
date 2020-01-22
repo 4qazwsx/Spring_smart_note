@@ -140,9 +140,9 @@ body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-2
 <div class="login-form">
 <div class="main-div">
 	
- <h1 class="memUpForm_title">회원정보 수정</h1>
- <h3 class="align-center"> ${members1.mem_id}회원님의 
- 							<br>회원정보를 수정할 수 있습니다. </h3>
+ <h3>회원정보 수정</h3>
+  ${members1.mem_id}회원님의 
+ 							<br>회원정보를 수정할 수 있습니다. 
    <form action="memUpPro.do" name="frm" onsubmit="return chk()">
 	
       <table>
