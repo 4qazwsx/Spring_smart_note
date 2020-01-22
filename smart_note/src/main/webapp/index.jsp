@@ -9,8 +9,7 @@
 <body>
 <%
 
-response.sendRedirect("schedule.do");
-
+response.sendRedirect("main.do");
 %>
 </body>
 </html>
