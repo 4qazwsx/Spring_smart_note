@@ -9,7 +9,7 @@
 <body>
 <%
 
-response.sendRedirect("schedule.do");
+response.sendRedirect("getshareNoteList.do");
 
 %>
 </body>
