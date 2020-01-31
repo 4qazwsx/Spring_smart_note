@@ -19,10 +19,15 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 
+//시간표에서 드래그한 부분의 색
+var drag_color = "#D5D5D5";
+//시간표 배경 색
+var bg_color = "white";
+
 //시간표 line 수 초기화
 var line = 9;
 
-//드래그 이벤트 상태 변수
+//드래그 이벤트 상태 변수 / 1일 경우 드래그 중
 var drag = 0;
 
 function linePlus(){
@@ -47,30 +52,34 @@ function lineMinus(){
 }
 
 function dragEvent(){
+	//
 	var startTd;
 	var endTd;
-	$('.schedule_event').click(function(){
-		//alert($(this).attr('id'));
-		if(drag==1){
-			//$(".schedule_event").css({"background-color": "white"});
-			endTd = $(this).attr('id');
-			
-			
-			day = endTd.split("_")[1];
-			start_time = startTd.split("_")[2];
-			end_time = endTd.split("_")[2];
-			end_time++;
-			drag = 0;
-			//.schedule_?_?
-			for(var i = start_time ; i < end_time ; i++){
-				$("#schedule_"+day+"_"+i).css({"background-color": "white"});
-			}
-			
-			return;
+	//직전의 td id를 저장
+	var lastTd;
+	
+	function colorRollback(endTd){//매개변수로 td의 아이디 값을 받는다.
+		//endTd = $(this).attr('id');
+		
+		
+		day = startTd.split("_")[1];
+		start_time = startTd.split("_")[2];
+		end_time = endTd.split("_")[2];
+		end_time++;
+		drag = 0;
+		//저장한 기록을 통해 드래그한 부분의 색을 원래대로 돌린다
+		for(var i = start_time ; i < end_time ; i++){
+			$("#schedule_"+day+"_"+i).css({"background-color": bg_color});
 		}
-		if(drag==0){
-			$(this).css({"background-color": "gold"});
+	}
+	
+	$('.schedule_event').mousedown(function(){
+		//alert($(this).attr('bgcolor'));
+
+		if(drag==0 && !$(this).attr('bgcolor')){
+			$(this).css({"background-color": drag_color});
 			startTd = $(this).attr('id');
+			lastTd =  $(this).attr('id');
 			drag = 1;	
 		}
 
@@ -78,12 +87,49 @@ function dragEvent(){
 	
 	$('.schedule_event').mouseover(function(){
 		if(drag==1){
-			$(this).css({"background-color": "gold"});
+			
+			var this_day = $(this).attr('id').split("_")[1];
+			var this_time = $(this).attr('id').split("_")[2];
+			start_day = startTd.split("_")[1];
+			var last_time = lastTd.split("_")[2];
+			//드래그를 위로 한 경우
+			if(this_time < last_time){
+				
+				$("#"+lastTd).css({"background-color": bg_color});
+				
+				if(this_time < startTd.split("_")[2]){
+					drag = 0;
+					return;
+				}
+			}
+			//옆으로 드래그한 경우
+			if(this_day != start_day){
+				colorRollback($(this).attr('id'))
+				return;
+			}
+			if($(this).attr('bgcolor')){
+				colorRollback($(this).attr('id'))
+				$(this).css({"background-color": $(this).attr('bgcolor')});
+				return;
+			}
+			
+			$(this).css({"background-color": drag_color});
+			lastTd =  $(this).attr('id');
 		}
 	});
 	
 	$('.schedule_event').mouseup(function(){
-
+		if(drag==1){ 
+			colorRollback($(this).attr('id'));
+			var day = $(this).attr('id').split("_")[1];
+			var start_time = startTd.split("_")[2]; 
+			var end_time = $(this).attr('id').split("_")[2];
+			
+			window.open("schduleAddSub.do?day="+day+"&start_time="+start_time+"&end_time="+end_time,
+						"과목 선택",
+						"width = 500, height = 500, top = 50%, left = 50%, location = no, toolbars = no")
+			return;
+		}
 	});
 }
 
@@ -92,7 +138,7 @@ $(document).ready(function(){
 })
 </script>
 </head>
-<body>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 <table border="1px" width="80%" id="schedule_table">
 	<tr>
 		<td id="linePlusButton" onclick="linePlus()">+</td>
@@ -115,6 +161,7 @@ $(document).ready(function(){
 					id="schedule_${day}_${sub}"
 					onmousedown="">
 					${daysSubList[day][sub].getSub_name()}
+					<c:if test="${daysSubList[day][sub] != null }"> <button>삭제</button> </c:if>
 				</td>
 		</c:forEach>
 		</tr>

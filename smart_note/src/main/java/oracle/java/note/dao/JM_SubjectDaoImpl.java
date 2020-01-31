@@ -15,8 +15,19 @@ public class JM_SubjectDaoImpl implements JM_SubjectDao {
 	private SqlSession session;
 	
 	@Override
-	public List<Subject> dayListSelect() {
-		return session.selectList("jm_dept_selectDept");
+	public List<Subject> dayListSelect(String mem_id) {
+		//return session.selectList("jm_subject_selectSubList", mem_id);
+		return session.selectList("jm_subject_selectSubList", "0");
+	}
+
+	@Override
+	public void updateSchduleTime(Subject newSubTime) {
+		session.update("jm_subject_updateTime", newSubTime);
+	}
+
+	@Override
+	public Subject subSelect(String sub_id) {
+		return session.selectOne("jm_subject_selectSub", sub_id);
 	}
 
 }

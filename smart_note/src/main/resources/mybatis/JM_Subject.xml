@@ -4,8 +4,14 @@
 
 <mapper namespace="JM_Subject">
 
-	<select id="jm_dept_selectDept" resultType="Subject">
-		SELECT * FROM subject
+	<select id="jm_subject_selectSubList" resultType="Subject" parameterType="java.lang.String">
+		SELECT * FROM subject WHERE mem_id = #{mem_id}
+	</select>
+	<update id="jm_subject_updateTime" parameterType="Subject">
+		UPDATE subject SET sub_day = #{sub_day}, sub_start = #{sub_start}, sub_time = #{sub_time} WHERE sub_id = #{sub_id}
+	</update>
+	<select id="jm_subject_selectSub" resultType="Subject" parameterType="java.lang.String">
+		SELECT * FROM subject WHERE sub_id=#{sub_id}
 	</select>
 
 </mapper>

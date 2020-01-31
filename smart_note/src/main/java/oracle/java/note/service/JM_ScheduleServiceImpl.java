@@ -16,9 +16,20 @@ public class JM_ScheduleServiceImpl implements JM_ScheduleService {
 	private JM_SubjectDao subDao;
 	
 	@Override
-	public List<Subject> dayListSelect() {
+	public List<Subject> dayListSelect(String mem_id) {
 		
-		return subDao.dayListSelect();
+		//return subDao.dayListSelect(mem_id);
+		return subDao.dayListSelect("0");
+	}
+
+	@Override
+	public void updateSchduleTime(Subject newSubTime) {
+		subDao.updateSchduleTime(newSubTime);
+	}
+
+	@Override
+	public Subject subSelect(String sub_id) {
+		return subDao.subSelect(sub_id);
 	}
 
 }
