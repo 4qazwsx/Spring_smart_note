@@ -125,13 +125,27 @@ function dragEvent(){
 			var start_time = startTd.split("_")[2]; 
 			var end_time = $(this).attr('id').split("_")[2];
 			
-			window.open("schduleAddSub.do?day="+day+"&start_time="+start_time+"&end_time="+end_time,
+			window.open("schdulePopup.do?day="+day+"&start_time="+start_time+"&end_time="+end_time,
 						"과목 선택",
 						"width = 500, height = 500, top = 50%, left = 50%, location = no, toolbars = no")
 			return;
 		}
 	});
 }
+
+/* function deleteSubjectTime(sub_id){
+	alert(sub_id);
+	
+	$.ajax({
+		
+		url : "deleteSubjectTime.do",
+		data : "sub_id=" + sub_id,
+		success : function(s){
+			//reload();
+		}
+		
+	})
+} */
 
 $(document).ready(function(){
 	dragEvent();
@@ -161,7 +175,12 @@ $(document).ready(function(){
 					id="schedule_${day}_${sub}"
 					onmousedown="">
 					${daysSubList[day][sub].getSub_name()}
-					<c:if test="${daysSubList[day][sub] != null }"> <button>삭제</button> </c:if>
+					<c:if test="${daysSubList[day][sub] != null }">
+						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">삭제</button>
+						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">이동</button>
+						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">설정</button>
+						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">쓰기</button>
+					</c:if>
 				</td>
 		</c:forEach>
 		</tr>

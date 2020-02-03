@@ -9,7 +9,6 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 function addSchuleTimeSubmit(){
-	
 	var params = $("#addSchduleTimeFform").serialize();
 	//alert(params);
 	$.ajax({
@@ -23,7 +22,22 @@ function addSchuleTimeSubmit(){
 		}
 		
 	})
-	
+}
+
+function newSubjectSubmit(){
+	var params = $("#newSubjectForm").serialize();
+	//alert(params);
+	$.ajax({
+		
+		url : "newSubject.do",
+		data : params,
+		success : function(s){
+			//alert("업로드 성공")
+			opener.parent.location.reload();
+			window.close();
+		}
+		
+	})
 }
 </script>
 
@@ -62,10 +76,12 @@ function addSchuleTimeSubmit(){
 <br>
 
 <span>새로운 과목 만들기</span>
-<form action="newSubject.do">
-	<input type="text" id="subName">
+<form action="newSubject.do" id="newSubjectForm">
+	<input type="text" id="subName" name="sub_name">
+	<textarea rows="10" cols="10" name="sub_description"></textarea>
 	<input type="submit" value="새 과목 추가">
 </form>
+<button onclick="newSubjectSubmit()">새 과목 추가</button>
 
 </body>
 </html>

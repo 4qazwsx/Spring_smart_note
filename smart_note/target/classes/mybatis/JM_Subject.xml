@@ -5,13 +5,25 @@
 <mapper namespace="JM_Subject">
 
 	<select id="jm_subject_selectSubList" resultType="Subject" parameterType="java.lang.String">
-		SELECT * FROM subject WHERE mem_id = #{mem_id}
+		SELECT * FROM subject WHERE mem_id = #{mem_id} ORDER BY sub_id
 	</select>
 	<update id="jm_subject_updateTime" parameterType="Subject">
-		UPDATE subject SET sub_day = #{sub_day}, sub_start = #{sub_start}, sub_time = #{sub_time} WHERE sub_id = #{sub_id}
+		UPDATE subject
+		<choose>
+			<when test="sub_color != null">
+				SET sub_color = #{sub_color}
+			</when>
+			<otherwise>
+				SET sub_day = #{sub_day}, sub_start = #{sub_start}, sub_time = #{sub_time}
+			</otherwise>
+		</choose>
+		 WHERE sub_id = #{sub_id}
 	</update>
 	<select id="jm_subject_selectSub" resultType="Subject" parameterType="java.lang.String">
 		SELECT * FROM subject WHERE sub_id=#{sub_id}
 	</select>
+	<insert id="jm_subject_insert" parameterType="Subject">
+		INSERT INTO SUBJECT (SUB_ID, MEM_ID, SUB_NAME, SUB_DESCRIPTION) VALUES (#{sub_id}, #{mem_id}, #{sub_name}, #{sub_description})
+	</insert>
 
 </mapper>

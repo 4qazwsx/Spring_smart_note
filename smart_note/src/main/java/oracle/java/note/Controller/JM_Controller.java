@@ -110,7 +110,7 @@ public class JM_Controller {
 		return "schedule";
 	}
 	
-	@RequestMapping(value="schduleAddSub")
+	@RequestMapping(value="schdulePopup")
 	public String schduleAddSub(Model model) {
 		
 		//List<Subject> subList = ScheculeServ.dayListSelect(mem_id);
@@ -118,7 +118,7 @@ public class JM_Controller {
 
 		model.addAttribute("subList", subList);
 		
-		return "schduleAddSub";
+		return "schdulePopup";
 
 	}
 	
@@ -200,29 +200,120 @@ public class JM_Controller {
 	}
 	
 	@RequestMapping(value="newSubject")
-	@ResponseBody
-	public String newSubject(Model model, String subName, HttpServletRequest request) {
+	public String newSubject(String sub_name, String sub_description, HttpServletRequest request) {
 		//세션의 mem_id 불러오기
-		HttpSession session = request.getSession();
-		String mem_id = (String) session.getAttribute("mem_id");
+		/*HttpSession session = request.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");*/
+		String mem_id = "0";
+		String sub_id = createSubId(mem_id);
 		
+		System.out.println("sub_id->"+sub_id);
+		System.out.println("sub_id->"+sub_name);
+		System.out.println("sub_id->"+sub_description);
 		
+		Subject sub = new Subject();
+		sub.setSub_id(sub_id);
+		sub.setMem_id(mem_id);
+		sub.setSub_name(sub_name);
+		sub.setSub_description(sub_description);
 		
+		ScheculeServ.insertSubject(sub);
 		
-		return "";
+		return "redirect:schdulePopup.do";
+	}
+	
+	@RequestMapping(value="deleteSubjectTime")
+	public String deleteSubjectTime(String sub_id, String time, String day) {
+		
+		if(sub_id != null) {
+		
+			System.out.println("sub_id->" + sub_id);
+			System.out.println("sub_time->" + time);
+			
+			Subject sub = ScheculeServ.subSelect(sub_id);
+			
+			String[] subDayList = sub.getSub_day().split(",");
+			String[] subStartList = sub.getSub_start().split(",");
+			String[] subTimeList = sub.getSub_time().split(",");
+			
+			String[] newSubDayList = new String[subStartList.length]; 
+			String[] newSubStartList = new String[subStartList.length];
+			String[] newSubTimeList = new String[subStartList.length];
+			
+			if(sub.getSub_day() != null) {//시간표에 등록되어 있다면
+				
+				for(String subDay : sub.getSub_day().split(",")) {
+					if(Integer.parseInt(subDay) == Integer.parseInt(day)) {
+						System.out.println("날짜 일치 ->" + day);
+					}
+				}
+				for(int i = 0 ; i < subStartList.length ; i++) {
+					int subDay = Integer.parseInt(subDayList[i]);
+					int start_time = Integer.parseInt(subStartList[i]);
+					int end_time = Integer.parseInt(subStartList[i]) + Integer.parseInt(subTimeList[i]);
+					//삭제할 시간과 일치할 경우
+					if(start_time <= Integer.parseInt(time) && Integer.parseInt(time) < end_time && subDay == Integer.parseInt(day)) {
+						System.out.println("삭제할 인덱스 발견");
+					}else {
+						newSubDayList[i] = subDayList[i];
+						newSubStartList[i] = subStartList[i];
+						newSubTimeList[i] = subTimeList[i];
+					}
+				}
+			}
+
+			System.out.println(mergeStringList(newSubDayList));
+			System.out.println(mergeStringList(newSubStartList));
+			System.out.println(mergeStringList(newSubTimeList));
+			
+			Subject newSub = new Subject();
+			
+			newSub.setSub_id(sub_id);
+			newSub.setSub_day(mergeStringList(newSubDayList));
+			newSub.setSub_start(mergeStringList(newSubStartList));
+			newSub.setSub_time(mergeStringList(newSubTimeList));
+			
+			ScheculeServ.updateSchduleTime(newSub);
+
+		}
+		
+		return "redirect:schedule.do";
 	}
 	
 	//String[]을 받아서 ,를 찍어 String으로 반환해주는 메소드
 	private String mergeStringList(String[] list) {
 		String mergedString = "";
 		for(int i = 0 ; i < list.length ; i++) {
-			//첫번째 문자만 그냥 추가 이후로는 ,문자를 추가
-			if(i != 0) {
-				mergedString += ","+list[i];
-			}else {
-				mergedString = list[i];
+			//null은 제외한다.
+			if(list[i] != null) {
+				//첫번째 문자만 그냥 추가 이후로는 ,문자를 추가
+				if(mergedString != "") {
+					mergedString += ","+list[i];
+				}else {
+					mergedString = list[i];
+				}
 			}
 		}
 		return mergedString;
+	}
+	
+	private String createSubId(String mem_id) {
+		
+		List<Subject> subList = ScheculeServ.dayListSelect(mem_id);
+		
+		int sub_num = 0;
+		
+		for(int i = 0 ; i < subList.size() ; i++) {
+			//과목 번호
+			sub_num = Integer.parseInt(subList.get(i).getSub_id().split("_")[2]);
+			System.out.println(subList.get(i).getSub_id());
+			//중간에 빈 과목 번호가 있으면 채워넣는 ID를 반환한다.
+			if(i != sub_num) {
+				System.out.println("aaaaaaaa");
+				return "sub_"+mem_id+"_"+Integer.toString(i);
+			}
+		}
+		//마지막 인덱스까지 빈 번호가 없을 경우
+		return "sub_"+mem_id+"_"+Integer.toString(sub_num+1);
 	}
 }
