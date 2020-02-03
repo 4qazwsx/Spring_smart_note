@@ -10,7 +10,6 @@
 <%
 
 response.sendRedirect("schedule.do");
-
 %>
 </body>
 </html>
