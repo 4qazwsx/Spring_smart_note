@@ -6,12 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>대필노트</title>
-<%@include file="header1.jsp" %>
+<%@include file="header.jsp" %>
 <style type="text/css">
 
-#schedule_table tr{
-	height: 100px;
-	width: 100px;
+#schedule_table td{
+	height: 150px;
+	width: 10%;
+	text-align: center;
 }
 
 </style>
@@ -126,12 +127,32 @@ function dragEvent(){
 			var start_time = startTd.split("_")[2]; 
 			var end_time = $(this).attr('id').split("_")[2];
 			
-			window.open("schduleAddSub.do?day="+day+"&start_time="+start_time+"&end_time="+end_time,
+			window.open("schdulePopup.do?day="+day+"&start_time="+start_time+"&end_time="+end_time,
 						"과목 선택",
 						"width = 500, height = 500, top = 50%, left = 50%, location = no, toolbars = no")
 			return;
 		}
 	});
+}
+
+/* function deleteSubjectTime(sub_id){
+	alert(sub_id);
+	
+	$.ajax({
+		
+		url : "deleteSubjectTime.do",
+		data : "sub_id=" + sub_id,
+		success : function(s){
+			//reload();
+		}
+		
+	})
+} */
+
+function subjectSetting(sub_id){
+	window.open("subjectSetting.do?sub_id="+sub_id,
+			"과목 설정",
+			"width = 500, height = 500, top = 50%, left = 50%, location = no, toolbars = no")
 }
 
 $(document).ready(function(){
@@ -140,19 +161,19 @@ $(document).ready(function(){
 </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-<table border="1px" width="80%" id="schedule_table">
-	<tr>
+<table border="1px" id="schedule_table">
+	<!-- <tr>
 		<td id="linePlusButton" onclick="linePlus()">+</td>
 		<td id="lineMinusButton" onclick="lineMinus()">-</td>
-	</tr>
+	</tr> -->
 	<tr>
-		<td>월</td>
-		<td>화</td>
-		<td>수</td>
-		<td>목</td>
-		<td>금</td>
-		<td>토</td>
-		<td>일</td>
+		<th>월</th>
+		<th>화</th>
+		<th>수</th>
+		<th>목</th>
+		<th>금</th>
+		<th>토</th>
+		<th>일</th>
 	</tr>
 	<c:forEach begin="0" end="9" var="sub">
 		<tr id="schedule_line_${sub}">
@@ -161,8 +182,13 @@ $(document).ready(function(){
 					class="schedule_event"
 					id="schedule_${day}_${sub}"
 					onmousedown="">
-					${daysSubList[day][sub].getSub_name()}
-					<c:if test="${daysSubList[day][sub] != null }"> <button>삭제</button> </c:if>
+					<p bgcolod="white">${daysSubList[day][sub].getSub_name()}</p>
+					<c:if test="${daysSubList[day][sub] != null }">
+						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">시간표에서 빼기</button>
+						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">필기목록</button>
+						<button onclick="subjectSetting('${daysSubList[day][sub].getSub_id()}')">과목설정</button>
+						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">새 필기</button>
+					</c:if>
 				</td>
 		</c:forEach>
 		</tr>

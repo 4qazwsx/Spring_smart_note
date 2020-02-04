@@ -1,13 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-<!-- jQuery -->
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
- -->
- <%-- <script src="${pageContext.request.contextPath}/resources/common/js/jquery-3.3.1.min.js" ></script> --%>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
 
 <!-- session이 없으면(비로그인시) 디폴트 값으로 서울의 날씨 코드를 넣어준다. -->
 <c:if test="${sessionScope.loc == null}">
@@ -32,15 +29,15 @@
 <script type="text/javascript">
 	//문서 시작시 적용
 	$(function(){
-		var thisPage = window.location.href.split('oMybatis3/')[1];
-		if(thisPage.split('?')[0] == "genderSelector.do"){
+		var thisPage = window.location.href.split('note/')[1];
+/* 		if(thisPage.split('?')[0] == "genderSelector.do"){
 			history.pushState(null,null,window.location.href.split('thisPage=')[1]);
 			window.location.reload();
-		}
+		} */
 		
-		if(thisPage.split('?')[0] == "styleDetail.do" || thisPage.split('?')[0] == "prddetail.do"){
+/* 		if(thisPage.split('?')[0] == "styleDetail.do" || thisPage.split('?')[0] == "prddetail.do"){
 			$("#header_bottom").css('display','none')
-		}
+		} */
 		
 		if(thisPage == "logout.do"){
 			history.pushState(null,null,"main.do");
@@ -314,36 +311,9 @@ header a:active{color: black; text-decoration: none;}
 
 /* header style end */
 </style>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<!-- Bootstrap theme -->
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap-theme.min.css"> --%>
+<header>
 
-<!-- common CSS -->
-<link rel="stylesheet" href="<c:url value='/resources/common/css/common.css'/>" >
-
-<!--메뉴바 추가 부분-->
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" href="schedule.do">대 필 NOTE</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarsExample03">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="schedule.do">MAIN <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">내 필기 관리</a>
-      </li>   <li class="nav-item">
-        <a class="nav-link" href="#">내 필기 공유</a>
-      </li>
-     
-    </ul>
-  </div>
-  
 <div id="header_root">
 	<div id="member_space">
 		<c:if test="${empty sessionScope.mem_id }">
@@ -356,5 +326,21 @@ header a:active{color: black; text-decoration: none;}
 			<button id="top_my_page_button" class="top_right_button" onclick="myCogiMenuControler()" >회원정보수정</button>
 		</c:if>
 	</div>
-
-</nav>
+	</div>
+	<div id="header_center">
+		<div id="menu_bar">
+			<table class="menu_bar_table">
+				<tr>
+					<td onclick="location.href='main.do'">대 필 노트</td>
+					<td onclick="location.href='myNoteView.do'">내 필기관리</td>
+					<td onclick="location.href='myNoteView.do'">내 필기 공유</td>
+					<td onclick="location.href='getBoardList.do'">공유 노트</td>
+				</tr>
+			</table>
+		</div>
+			</form>
+		</div>
+	</div>
+</div>
+</header>
+</html>

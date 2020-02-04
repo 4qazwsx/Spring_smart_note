@@ -32,4 +32,11 @@ public class JM_ScheduleServiceImpl implements JM_ScheduleService {
 		return subDao.subSelect(sub_id);
 	}
 
+	@Override
+	public void insertSubject(Subject sub) {
+		
+		subDao.insertSubject(sub);
+		
+	}
+
 }

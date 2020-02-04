@@ -4,16 +4,16 @@
 <configuration>
   <typeAliases>
       <typeAlias  alias="Member"  type="oracle.java.note.model.Member"/>
-  	<typeAlias alias="YJ_Members"      type="oracle.java.note.model.YJ_Members" /> 
-	
-  
+	  <typeAlias alias="YJ_Members" type="oracle.java.note.model.YJ_Members"/> 
       <typeAlias  alias="Subject"  type="oracle.java.note.model.Subject"/>
+      <typeAlias  alias="Note"  type="oracle.java.note.model.Note"/>
   </typeAliases>
 
   <mappers>
       <mapper resource="mybatis/JM_Subject.xml"/>
-  <mapper resource="mybatis/YJ_Members.xml" />
-		
+	  <mapper resource="mybatis/YJ_Members.xml" />
+	  <mapper resource="mybatis/Mynote.xml" />
+      <mapper resource="mybatis/shareNoteListMapper.xml"/> 
   </mappers>
 
 

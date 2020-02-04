@@ -9,6 +9,8 @@ public class Subject {
 	String sub_time;
 	String sub_description;
 	String sub_color;
+	
+	
 	public String getSub_id() {
 		return sub_id;
 	}
@@ -57,5 +59,4 @@ public class Subject {
 	public void setSub_color(String sub_color) {
 		this.sub_color = sub_color;
 	}
-	
 }

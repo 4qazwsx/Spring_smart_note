@@ -30,4 +30,9 @@ public class JM_SubjectDaoImpl implements JM_SubjectDao {
 		return session.selectOne("jm_subject_selectSub", sub_id);
 	}
 
+	@Override
+	public void insertSubject(Subject sub) {
+		session.insert("jm_subject_insert", sub);
+	}
+
 }
