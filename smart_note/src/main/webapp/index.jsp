@@ -8,6 +8,7 @@
 </head>
 <body>
 <%
+<<<<<<< HEAD
 
 //response.sendRedirect("schedule.do");
 //response.sendRedirect("beforeMyNote.do");
@@ -16,6 +17,15 @@
 //response.sendRedirect("addFavSub.do");
 //response.sendRedirect("myNoteView.do");
 response.sendRedirect("HJ_Main.do");
+=======
+//response.sendRedirect("getshareNoteList.do");
+response.sendRedirect("schedule.do");
+//response.sendRedirect("beforeMyNote.do");
+//response.sendRedirect("addSubForm.do");
+//response.sendRedirect("list.do");
+//response.sendRedirect("addFavSub.do");
+//response.sendRedirect("myNoteView.do");
+>>>>>>> refs/remotes/origin/merge
 //response.sendRedirect("note_Search.do");
 %>
 </body>

@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 body {	font-family: 굴림체; text-align: center;	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 table { border: 1px solid pink; width: 100%; 
          }
 tr { height: 30px; background: yellow; }
@@ -21,3 +22,17 @@ td {	background: #B7F0B1;	}
 
 
 >>>>>>> refs/remotes/origin/IK
+=======
+table { border: 2px solid pink; width: 100%; 
+         }
+tr { height: 30px; background: green; }
+/* th {	background: #C9BFED;	} */
+th {	background: #b9b973;	} 
+td {	background: #B7F0B1;	} 
+
+
+
+
+
+
+>>>>>>> refs/remotes/origin/merge
