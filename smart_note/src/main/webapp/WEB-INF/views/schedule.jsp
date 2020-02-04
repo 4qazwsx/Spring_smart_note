@@ -8,9 +8,10 @@
 <title>대필노트</title>
 <style type="text/css">
 
-#schedule_table tr{
-	height: 100px;
-	width: 100px;
+#schedule_table td{
+	height: 150px;
+	width: 10%;
+	text-align: center;
 }
 
 </style>
@@ -147,25 +148,31 @@ function dragEvent(){
 	})
 } */
 
+function subjectSetting(sub_id){
+	window.open("subjectSetting.do?sub_id="+sub_id,
+			"과목 설정",
+			"width = 500, height = 500, top = 50%, left = 50%, location = no, toolbars = no")
+}
+
 $(document).ready(function(){
 	dragEvent();
 })
 </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-<table border="1px" width="80%" id="schedule_table">
-	<tr>
+<table border="1px" id="schedule_table">
+	<!-- <tr>
 		<td id="linePlusButton" onclick="linePlus()">+</td>
 		<td id="lineMinusButton" onclick="lineMinus()">-</td>
-	</tr>
+	</tr> -->
 	<tr>
-		<td>월</td>
-		<td>화</td>
-		<td>수</td>
-		<td>목</td>
-		<td>금</td>
-		<td>토</td>
-		<td>일</td>
+		<th>월</th>
+		<th>화</th>
+		<th>수</th>
+		<th>목</th>
+		<th>금</th>
+		<th>토</th>
+		<th>일</th>
 	</tr>
 	<c:forEach begin="0" end="9" var="sub">
 		<tr id="schedule_line_${sub}">
@@ -174,12 +181,12 @@ $(document).ready(function(){
 					class="schedule_event"
 					id="schedule_${day}_${sub}"
 					onmousedown="">
-					${daysSubList[day][sub].getSub_name()}
+					<p bgcolod="white">${daysSubList[day][sub].getSub_name()}</p>
 					<c:if test="${daysSubList[day][sub] != null }">
-						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">삭제</button>
-						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">이동</button>
-						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">설정</button>
-						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">쓰기</button>
+						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">시간표에서 빼기</button>
+						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">필기목록</button>
+						<button onclick="subjectSetting('${daysSubList[day][sub].getSub_id()}')">과목설정</button>
+						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">새 필기</button>
 					</c:if>
 				</td>
 		</c:forEach>
