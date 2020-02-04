@@ -7,15 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-response.sendRedirect("schedule.do");
-//response.sendRedirect("schedule.do");
-//response.sendRedirect("beforeMyNote.do");
-//response.sendRedirect("addSubForm.do");
-//response.sendRedirect("list.do");
-//response.sendRedirect("addFavSub.do");
-//response.sendRedirect("myNoteView.do");
-//response.sendRedirect("note_Search.do");
-%>
+addFavSub.JSP입니다.
 </body>
 </html>
