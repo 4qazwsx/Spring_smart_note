@@ -40,7 +40,7 @@ border: solid;
  </table>
  <div id="Content">
 <table>
-	<tr><th >번호</th><th>사번</th><th>이름</th><th>업무</th><th>급여</th></tr>
+	<tr><th >과목</th><th>작성자</th><th>제목</th><th>내용</th><th>공유여부</th></tr>
 	
 </table>
 <c:if test="${pg.startPage > pg.pageBlock }">
