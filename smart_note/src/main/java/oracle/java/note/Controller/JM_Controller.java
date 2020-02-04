@@ -1,6 +1,8 @@
 package oracle.java.note.Controller;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -278,6 +280,16 @@ public class JM_Controller {
 		}
 		
 		return "redirect:schedule.do";
+	}
+	
+	@RequestMapping
+	public String subjectSetting(String sub_id, Model model) {
+		
+		Subject sub = ScheculeServ.subSelect(sub_id); 
+
+		model.addAttribute("subject", sub);
+		
+		return "subjectSetting";
 	}
 	
 	//String[]을 받아서 ,를 찍어 String으로 반환해주는 메소드
