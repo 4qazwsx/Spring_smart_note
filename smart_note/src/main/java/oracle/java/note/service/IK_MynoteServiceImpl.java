@@ -49,20 +49,18 @@ public class IK_MynoteServiceImpl implements IK_MynoteService {
 
 
 	@Override
-	public String confirmSub() {
-		System.out.println(" IK_MynoteServiceImpl updateCnt Start...");
-		return md.confirmSub();
+	public List<Subject> select() {
+		// TODO Auto-generated method stub
+		return md.select();
 	}
 
 
 
-	
-
-
 	@Override
-	public List<Subject> select() {
-		// TODO Auto-generated method stub
-		return md.select();
+	public Subject confirm(String sub_name) {
+		System.out.println("Subject confirm Start...");
+		
+		return md.confirm(sub_name);
 	}
 
 
