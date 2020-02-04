@@ -12,6 +12,8 @@ public class Member {
 	int mem_gender;
 	Date mem_join_date;
 	int mem_status;
+	
+	
 	public String getMem_id() {
 		return mem_id;
 	}

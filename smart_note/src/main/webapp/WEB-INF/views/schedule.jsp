@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>대필노트</title>
+<%@include file="header.jsp" %>
 <style type="text/css">
 
 #schedule_table td{
