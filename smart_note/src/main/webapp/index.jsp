@@ -17,6 +17,7 @@ response.sendRedirect("schedule.do");
 //response.sendRedirect("myNoteView.do");
 //response.sendRedirect("note_Search.do");
 //response.sendRedirect("getBoardList.do");
+//response.sendRedirect("HJ_Main.do");
 %>
 </body>
 </html>

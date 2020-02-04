@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+div{
+border: solid;
+}
+
+body {	font-family: 굴림체; text-align: left;	}
+table { border: 1px solid pink; width: 100%; 
+         }
+tr { height: 30px; background: yellow; }
+th {	background: #C9BFED;	}
+th {	background: #b9b973;	}
+td {	background: #f9f3b3;	}
+.button{display: block; width: 145px; margin: 26px auto 0; padding: 7px 0; border: 1px solid #6a5845; background-color: #666666; color: #FFFFFF;}
