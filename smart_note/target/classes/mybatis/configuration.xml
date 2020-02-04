@@ -8,6 +8,8 @@
 
   <mappers>
       <!-- <mapper resource="mybatis/JM_batis.xml"/> -->
+      <mapper resource="mybatis/shareNoteListMapper.xml"/> 
+      
   </mappers>
 
 
