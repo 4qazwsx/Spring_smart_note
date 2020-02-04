@@ -8,8 +8,8 @@
 </head>
 <body>
 <%
+//response.sendRedirect("getshareNoteList.do");
 response.sendRedirect("schedule.do");
-//response.sendRedirect("schedule.do");
 //response.sendRedirect("beforeMyNote.do");
 //response.sendRedirect("addSubForm.do");
 //response.sendRedirect("list.do");
