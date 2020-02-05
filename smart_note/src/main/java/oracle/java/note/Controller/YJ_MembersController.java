@@ -45,7 +45,7 @@ public String logout(HttpServletRequest request, Model model) {
 	System.out.println("Start Logout Form");
 	HttpSession session = request.getSession();
 	session.invalidate(); //로그아웃시 세션정보 사라지게
-	return "main";
+	return "schedule";
 }
 @RequestMapping(value="memUpForm")
 public String memUpForm(HttpServletRequest request, YJ_Members members, Model model) {

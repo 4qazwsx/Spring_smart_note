@@ -32,18 +32,19 @@
 <script type="text/javascript">
 	//문서 시작시 적용
 	$(function(){
-		var thisPage = window.location.href.split('oMybatis3/')[1];
-		if(thisPage.split('?')[0] == "genderSelector.do"){
+		var thisPage = window.location.href.split('note/')[1];
+/* 		if(thisPage.split('?')[0] == "genderSelector.do"){
 			history.pushState(null,null,window.location.href.split('thisPage=')[1]);
 			window.location.reload();
-		}
+		} */
 		
-		if(thisPage.split('?')[0] == "styleDetail.do" || thisPage.split('?')[0] == "prddetail.do"){
+/* 		if(thisPage.split('?')[0] == "styleDetail.do" || thisPage.split('?')[0] == "prddetail.do"){
 			$("#header_bottom").css('display','none')
-		}
+		} */
 		
 		if(thisPage == "logout.do"){
-			history.pushState(null,null,"main.do");
+			history.pushState(null,null,"schedule.do");
+			window.location.reload();
 		}	
 	})
 	
@@ -71,7 +72,6 @@
 	}
 
 </script>
-
 <style type="text/css">
 /* theme color list
 	#E45151	
@@ -356,5 +356,4 @@ header a:active{color: black; text-decoration: none;}
 			<button id="top_my_page_button" class="top_right_button" onclick="myCogiMenuControler()" >회원정보수정</button>
 		</c:if>
 	</div>
-
 </nav>
