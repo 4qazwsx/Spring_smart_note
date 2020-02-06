@@ -9,6 +9,10 @@
 <%@include file="header.jsp" %>
 <style type="text/css">
 
+#schedule_table{
+	width: 100%;
+}
+
 #schedule_table td{
 	height: 150px;
 	width: 10%;
@@ -129,7 +133,7 @@ function dragEvent(){
 			
 			window.open("schdulePopup.do?day="+day+"&start_time="+start_time+"&end_time="+end_time,
 						"과목 선택",
-						"width = 500, height = 500, top = 50%, left = 50%, location = no, toolbars = no")
+						"width = 1000px, height = 650px, top = 50%, left = 50%, location = no, toolbars = no")
 			return;
 		}
 	});
@@ -187,7 +191,7 @@ $(document).ready(function(){
 						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">시간표에서 빼기</button>
 						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">필기목록</button>
 						<button onclick="subjectSetting('${daysSubList[day][sub].getSub_id()}')">과목설정</button>
-						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">새 필기</button>
+						<button onclick="location.href='writeNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">새 필기</button>
 					</c:if>
 				</td>
 		</c:forEach>

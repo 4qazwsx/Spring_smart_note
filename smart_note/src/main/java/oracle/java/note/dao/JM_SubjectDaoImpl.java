@@ -16,13 +16,12 @@ public class JM_SubjectDaoImpl implements JM_SubjectDao {
 	
 	@Override
 	public List<Subject> dayListSelect(String mem_id) {
-		//return session.selectList("jm_subject_selectSubList", mem_id);
-		return session.selectList("jm_subject_selectSubList", "0");
+		return session.selectList("jm_subject_selectSubList", mem_id);
 	}
 
 	@Override
-	public void updateSchduleTime(Subject newSubTime) {
-		session.update("jm_subject_updateTime", newSubTime);
+	public void updateSubject(Subject sub) {
+		session.update("jm_subject_update", sub);
 	}
 
 	@Override
@@ -33,6 +32,11 @@ public class JM_SubjectDaoImpl implements JM_SubjectDao {
 	@Override
 	public void insertSubject(Subject sub) {
 		session.insert("jm_subject_insert", sub);
+	}
+
+	@Override
+	public void deleteSubject(String sub_id) {
+		session.delete("jm_subject_delete", sub_id);
 	}
 
 }
