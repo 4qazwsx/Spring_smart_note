@@ -7,9 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <style>
-div{
-border: solid;
-}
 #wrap { position: absolute; top: 10px; left: 50%; margin-left: -512px; width:1034px; }
 #Header { position: absolute; top: 10px; left: 5px; width: 1024px; height: 80px; align: center; background: #EAEAEA; }
 #Menu { position: absolute; top: 100px; left: 5px; width: 250px; height: 600px; align: center; background: #EAEAEA; }
@@ -22,6 +19,10 @@ border: solid;
 <div id="wrap">
  <div id="Header"><table>
 		<h1>과목
+		<select name="SubSel">
+		<c:forEach var="emp" items="${list }">
+				<option value="${emp.job}">${emp.job}</option>
+		</c:forEach></select>
 		</h1>
 </table>	
 </div border="solid">
@@ -40,8 +41,16 @@ border: solid;
  </table>
  <div id="Content">
 <table>
-	<tr><th >과목</th><th>작성자</th><th>제목</th><th>내용</th><th>공유여부</th></tr>
-	
+	<tr><th >번호</th><th>사번</th><th>이름</th><th>업무</th><th>급여</th></tr>
+	<%
+		session.setAttribute("id","abcde");
+     %>
+	<c:forEach var="emp" items="${list }">
+		<tr><td>${num }</td><td>${emp.empno }</td>
+		<td><a href="detail.do?empno=${emp.empno}" onclick="setSession(${emp.empno})">${emp.ename}</a></td>
+			<td>${emp.job }</td><td>${emp.sal }</td></tr>
+		<c:set var="num" value="${num - 1 }"></c:set>
+	</c:forEach>
 </table>
 <c:if test="${pg.startPage > pg.pageBlock }">
 	<a href="HJ_Main.do?currentPage=${pg.startPage-pg.pageBlock}">[이전]</a>

@@ -16,9 +16,5 @@ public interface IK_MynoteService {
     List<String> list(String sub_name);
     String confirmSub();
     List<Subject> select();
-<<<<<<< HEAD
-
-=======
    
->>>>>>> refs/remotes/origin/merge
 }
