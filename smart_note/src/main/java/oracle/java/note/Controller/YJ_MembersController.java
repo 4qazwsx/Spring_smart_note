@@ -155,8 +155,17 @@ public String join(Model model) {
 @RequestMapping(value="joinPro")
 public String writedo(YJ_Members members, Model model) {
 	System.out.println("joinPro start");
-
-	int result = YM.insert(members); //회원가입시 모든 정보를 Insert함
+	int result= 0;
+	try{ result = YM.insert(members);
+	model.addAttribute("result",result);
+	System.out.println("result1 -> "+result);
+	}
+	catch(Exception e) {System.out.println("e.getmessage"+e.getMessage());
+	model.addAttribute("result",result);
+	System.out.println("result2 -> "+result);
+	}
+	
+	//회원가입시 모든 정보를 Insert함
 	return "joinPro";
 }
 
@@ -165,6 +174,15 @@ public String writedo(YJ_Members members, Model model) {
 public String confirm(HttpServletRequest request, Model model) {
 	String mem_id = request.getParameter("mem_id");
 	int members = YM.detail(mem_id); //mem_id를 받아와서 중복된 id인지 조회한다.
+	System.out.println("memberAjax->"+members);
+	return String.valueOf(members);
+}
+
+@ResponseBody
+@RequestMapping(value="checkSignup1",method = RequestMethod.POST)
+public String confirm2(HttpServletRequest request, Model model) {
+	String mem_email = request.getParameter("mem_email");
+	int members = YM.detail1(mem_email); //mem_id를 받아와서 중복된 id인지 조회한다.
 	System.out.println("memberAjax->"+members);
 	return String.valueOf(members);
 }

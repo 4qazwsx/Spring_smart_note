@@ -61,6 +61,11 @@ public class YJ_MembersServiceimpl implements YJ_MembersService {
 		// TODO Auto-generated method stub
 		return md.check(member);
 	}
+	@Override
+	public int detail1(String mem_email) {
+		// TODO Auto-generated method stub
+		return md.checkemail(mem_email);
+	}
 	}
 
 

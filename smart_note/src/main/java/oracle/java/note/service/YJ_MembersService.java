@@ -16,4 +16,5 @@ public interface YJ_MembersService {
 	YJ_Members getMemberDate(String mem_id);
 	YJ_Members check(YJ_Members member);
 	int update1(YJ_Members member);
+	int detail1(String mem_email);
 	}

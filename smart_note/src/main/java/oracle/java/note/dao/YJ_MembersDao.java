@@ -25,5 +25,7 @@ public interface YJ_MembersDao {
 
 	int update1(YJ_Members member);
 
+	int checkemail(String mem_email);
+
 
 	}

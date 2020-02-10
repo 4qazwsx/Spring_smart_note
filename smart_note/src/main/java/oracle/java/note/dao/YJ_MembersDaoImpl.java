@@ -88,4 +88,10 @@ public class YJ_MembersDaoImpl implements YJ_MembersDao {
 		return member;
 		}
 
+	@Override
+	public int checkemail(String mem_email) {
+		// TODO Auto-generated method stub
+		return session.selectOne("YJ_confirm2",mem_email);
+	}
+
 	}

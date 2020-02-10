@@ -58,6 +58,26 @@
       });    //end on    
 	 });
 	 
+	 $(document).ready(function(){
+		  $('#checkbtn1').on('click', function(){
+				 $.ajax({
+				type: 'POST',
+				url: "checkSignup1.do",
+				  data: {
+	                  "mem_email" : $('#mem_email').val()
+	              },
+				success : function(data){
+					
+					  if($.trim(data) == 0){
+	                      $('#checkMsg1').html('<p style="color:blue">사용가능</p>');
+	                  }
+	                  else{
+	                      $('#checkMsg1').html('<p style="color:red">사용불가능</p>');
+	                  }
+	              }
+	          });    //end ajax    
+	      });    //end on    
+		 });
 		
 	function winop() {
 		if (!frm.mem_id.value) {
@@ -69,7 +89,7 @@
 				"width=600 height=300");
 	}
 	
-	function chk1() {
+	function chk1() { 
 		if (!frm.mem_id.value) {
 			alert("사번을 입력한 후에 확인하세요");
 			frm.mem_id.focus();
@@ -190,7 +210,9 @@ body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-2
 </tr>
 <tr>
 	 <td> <label>이&nbsp;메&nbsp;일</label> </td>
-	  <td><input type="text" class="form-control" name="mem_email" required="required"></td>
+	  <td><input type="text" class="form-control" name="mem_email" id="mem_email" required="required"></td>
+	  <td><input type="button" value="중복확인" id="checkbtn1" name="checkbtn1" class="btn btn-primary" >
+   	  	</td><td><div id="checkMsg1"></div></td>
  </tr>
  <tr>
 	 <td> <label>주&nbsp;소</label></td>

@@ -17,10 +17,13 @@
   </resultMap>
 
    <insert id="YJ_insert" parameterType="YJ_Members">
-   INSERT INTO Members VALUES (#{mem_id}, #{mem_pw},#{mem_name}, #{mem_phone}, #{mem_email}, #{mem_addr}, #{mem_gender}, sysdate , #{mem_status})
+   INSERT INTO Members VALUES (#{mem_id, jdbcType=VARCHAR}, #{mem_pw},#{mem_name}, #{mem_phone}, #{mem_email}, #{mem_addr}, #{mem_gender}, sysdate , #{mem_status})
    </insert>
    <select id="YJ_confirm" parameterType="YJ_Members" resultType="int">
    select count(*) from members where  mem_id= #{mem_id}
+   </select>
+   <select id="YJ_confirm2" parameterType="YJ_Members" resultType="int">
+   select count(*) from members where  mem_email= #{mem_email}
    </select>
    <select id="YJ_SrhId" parameterType="YJ_Members" resultType="YJ_Members">
     
