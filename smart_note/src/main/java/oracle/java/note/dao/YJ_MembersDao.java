@@ -9,7 +9,7 @@ public interface YJ_MembersDao {
 
 	int insert(YJ_Members members);
 
-	YJ_Members confirm1(String mem_id);
+	int confirm1(String mem_id);
 
 	YJ_Members SrhId(YJ_Members members);
 

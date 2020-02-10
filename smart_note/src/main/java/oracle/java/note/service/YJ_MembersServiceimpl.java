@@ -22,7 +22,7 @@ public class YJ_MembersServiceimpl implements YJ_MembersService {
 			return md.insert(members);
 		}
 	@Override
-	public YJ_Members detail(String mem_id) {
+	public int detail(String mem_id) {
 		// TODO Auto-generated method stub
 		return md.confirm1(mem_id);
 	}

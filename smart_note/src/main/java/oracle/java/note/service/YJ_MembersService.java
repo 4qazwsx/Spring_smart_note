@@ -8,7 +8,7 @@ import oracle.java.note.model.YJ_Members;
 
 public interface YJ_MembersService {
 	int insert(YJ_Members members);
-	YJ_Members detail(String mem_id);
+	int detail(String mem_id);
 	YJ_Members SrhId(YJ_Members members);
 	YJ_Members SrhPw(YJ_Members members);
 	YJ_Members confirmUser(YJ_Members members);

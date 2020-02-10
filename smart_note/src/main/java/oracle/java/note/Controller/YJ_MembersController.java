@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import oracle.java.note.model.YJ_Members;
 import oracle.java.note.service.YJ_MembersService;
@@ -159,18 +160,13 @@ public String writedo(YJ_Members members, Model model) {
 	return "joinPro";
 }
 
-@RequestMapping(value="confirm1")
-public String confirm(String mem_id, Model model) {
-	YJ_Members members = YM.detail(mem_id); //mem_id를 받아와서 중복된 id인지 조회한다.
-	model.addAttribute("mem_id",mem_id); //mem_id를 넘겨준다
-	if(members != null) {//만약 조회된 mem_id
-		model.addAttribute("msg","중복된 아이디입니다.");
-		model.addAttribute("tk",1);
-	}else {
-		model.addAttribute("msg","사용가능 아이디입니다");
-		model.addAttribute("tk",2);
-	}
-	return "forward:joinForm.do";
+@ResponseBody
+@RequestMapping(value="checkSignup",method = RequestMethod.POST)
+public String confirm(HttpServletRequest request, Model model) {
+	String mem_id = request.getParameter("mem_id");
+	int members = YM.detail(mem_id); //mem_id를 받아와서 중복된 id인지 조회한다.
+	System.out.println("memberAjax->"+members);
+	return String.valueOf(members);
 }
 
 

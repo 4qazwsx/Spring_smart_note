@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+
+<%
+	String context = request.getContextPath();
+    System.out.println("context->"+context);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
 <script type="text/javascript">
+
 	function chk() {
 		if (frm.mem_pw.value != frm.mem_pw2.value) {
 			alert("암호가 다릅니다");
@@ -29,6 +35,30 @@
 		
 		
 	}
+	
+	 $(document).ready(function(){
+	  $('#checkbtn').on('click', function(){
+
+			 $.ajax({
+			type: 'POST',
+			url: "checkSignup.do",
+			  data: {
+                  "mem_id" : $('#mem_id').val()
+              },
+			success : function(data){
+				
+				  if($.trim(data) == 0){
+                      $('#checkMsg').html('<p style="color:blue">사용가능</p>');
+                  }
+                  else{
+                      $('#checkMsg').html('<p style="color:red">사용불가능</p>');
+                  }
+              }
+          });    //end ajax    
+      });    //end on    
+	 });
+	 
+		
 	function winop() {
 		if (!frm.mem_id.value) {
 			alert("id를 입력하고 사용하세요");
@@ -48,7 +78,9 @@
 	}
 
 
-</script><style>
+</script>
+
+<style>
 
 body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
 
@@ -98,7 +130,6 @@ body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-2
 }
 .botto-text {
   color: #ffffff;
-  font-size: 14px;
   margin: auto;
 }
 .login-form .btn.btn-primary.reset {
@@ -136,9 +167,9 @@ body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-2
 
   
       <table>
-      <tr><td>아이디</td> <td><input type="text" class="form-control" name="mem_id" required="required" ></td>
-      <td><label class="joinForm_joinButton"><a onclick="chk1()">중복확인</a> </label></td><c:if test="${msg!=null}">${mem_id}는 ${msg}</c:if>
-   	  
+      <tr><td>아이디</td> <td><input type="text" class="form-control" id="mem_id" name="mem_id" required="required" ></td>
+      <td><input type="button" value="중복확인" id="checkbtn" name="checkbtn" class="btn btn-primary" >
+   	  	</td><td><div id="checkMsg"></div></td>
     	</tr>
   
   
