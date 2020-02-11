@@ -116,7 +116,9 @@ body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-2
 			<input class="btn btn-primary" type="submit" value="회원가입">
 			</form> -->
    
+ 
     </div>
+    
 <p class="botto-text"> 대필 노트</p>
 </div></div></div>
 
