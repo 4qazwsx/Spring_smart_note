@@ -143,15 +143,7 @@ function addSub(){
 			alert("과목 입력하세요")
 			return false
 		} 
-		
-		 
-	
-		 
-		 
-		 
-		 
-		 
-		
+
      	alert(sub_name+"를 추가 합니다"); 
 		
 		
@@ -200,13 +192,8 @@ function db_sub(){
 			
 			
 			
-			/* for(var ele in jsondata){ 
-				 
-					console.log(jsondata[ele]); } 
- */
-			
  
-			var i=[{"t_no":"120","t_content":"test11","t_writer":"여성게","obtain":"0","t_date":"2018-         04-27"},
+			/* var i=[{"t_no":"120","t_content":"test11","t_writer":"여성게","obtain":"0","t_date":"2018-         04-27"},
 	            {"t_no":"119","t_content":"test10","t_writer":"여성게","obtain":"0","t_date":"2018-04-27"},
 	            {"t_no":"118","t_content":"test9","t_writer":"여성게","obtain":"0","t_date":"2018-04-27"},
 	            {"t_no":"117","t_content":"test8","t_writer":"여성게","obtain":"0","t_date":"2018-04-27"},
@@ -231,49 +218,13 @@ function db_sub(){
 		        /*for(var ele2 in i[ele]){
 		            console.log(i[ele][ele2]);
 		        } */
-		        console.log(i[ele].t_no);
+		        /* console.log(i[ele].t_no);
 		        console.log(i[ele].t_content);
 		        console.log(i[ele].t_writer);
 		        console.log(i[ele].obtain);
 		        console.log(i[ele].t_date);
-		    }
+		    }  */
 
-
-		
-
-
-	
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-		
-			
-			
-			
-			/* $.each(jsondata,function(idx,row){
-        	   if(jsondata[idx].sub_name == "국어"){
-        		   return jsondata[idx];
-        	   }
-           return"";
-           }); */
-			
-          
-           
-           
 		}
 			
 			
@@ -285,6 +236,54 @@ function db_sub(){
 
 	
 }
+ 
+ 
+function checkId() {
+	/* alert("추가하시겠습니까"); */
+	
+	 if (!frm.sub_name.value ) {
+		alert("과목 입력하세요")
+		return false
+	}else{
+   
+		var sub_name = $('#sub_name').val();
+	    console.log(sub_name);
+	    alert(sub_name+"추가하시겠습니까");
+		
+		
+	    $.ajax({
+	        
+	        type:"post",
+	        url : "<%=context%>/checkId.do",
+	        async:true,
+	        data:"sub_name=" + sub_name,
+	        success:function(msg){
+	            alert("ajax success")
+	            idCheckMsg(msg);
+	        },
+	         error : function(){
+	            alert("ajax error");
+	        }
+	      });
+
+      }
+ 
+}
+ 
+ 
+function idCheckMsg(msg) {
+    
+    if(msg.message == 'YES'){
+        $("#sub_name").html("사용할 수 없는 과목");
+               
+    }else{
+        $("#sub_name").html("사용가능 과목");
+             
+    }        
+
+}
+
+ 
  
  
  
@@ -368,7 +367,7 @@ function db_sub(){
 	<form action="" name="frm">
 		<input type="text" name="sub_name" id="sub_name">
 		
-		<input type="button" value="확인" id="submit" onclick="addSub()">   <!-- addSub() -->
+		<input type="button" value="확인" id="submit" onclick="checkId()">   <!-- addSub() -->
 	</form>
 
 	
