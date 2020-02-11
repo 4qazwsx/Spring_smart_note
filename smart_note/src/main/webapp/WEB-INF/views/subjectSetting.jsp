@@ -10,7 +10,7 @@
 function subjectSettingSubmit(){
 	var params = $("#subjectSettingForm").serialize();
 	$.ajax({
-		url : "newSubject.do",
+		url : "changeSubjectSetting.do",
 		data : params,
 		success : function(s){
 			opener.parent.location.reload();
