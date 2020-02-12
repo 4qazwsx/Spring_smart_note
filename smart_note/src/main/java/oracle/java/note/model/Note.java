@@ -10,6 +10,7 @@ public class Note {
 	String note_contents;
 	Date note_date;
 	int note_share;
+	
 	public String getNote_id() {
 		return note_id;
 	}
@@ -52,5 +53,4 @@ public class Note {
 	public void setNote_share(int note_share) {
 		this.note_share = note_share;
 	}
-	
 }
