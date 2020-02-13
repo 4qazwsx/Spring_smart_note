@@ -45,7 +45,8 @@ public class WY_ShareNoteList_Controller {
     @RequestMapping(value = "getBoardContent", method = RequestMethod.GET)
 	public String getBoardContent(Model model, @RequestParam("note_id") int note_id) throws Exception {
 		model.addAttribute("boardContent", shareNoteListSevice.getBoardContent(note_id));
-		return "shareNoteList/boardContent";
+		System.out.println("들어갔나?" + shareNoteListSevice.getBoardContent(note_id));
+		return "boardContent";
 	}
 
 }
