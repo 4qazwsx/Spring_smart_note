@@ -331,7 +331,7 @@ header a:active{color: black; text-decoration: none;}
 		<div id="menu_bar">
 			<table class="menu_bar_table">
 				<tr>
-					<td onclick="location.href='main.do'">대 필 노트</td>
+					<td onclick="location.href='schedule.do'">대 필 노트</td>
 					<td onclick="location.href='myNoteView.do'">내 필기관리</td>
 					<td onclick="location.href='myNoteView.do'">내 필기 공유</td>
 					<td onclick="location.href='getBoardList.do'">공유 노트</td>

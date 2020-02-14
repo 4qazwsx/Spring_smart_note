@@ -37,13 +37,16 @@
 bold{
 	font-weight: bold;
 }
+brightPen{
+	background-color: yellow;
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 
 var i = 1;
-var selText = document.getSelection();
+var selText = window.getSelection();
 
 $(document).ready(function(){
 	$("input").change(function(){
@@ -57,7 +60,6 @@ $(document).ready(function(){
 		//alert("selText.focusOffset->"+selText.focusOffset);
 		//alert("selText.isCollapsed->"+selText.isCollapsed);
 		//alert("selText.rangeCount->"+selText.rangeCount);
-		//alert("document.selection.createRange().text->"+document.selection.createRange().text);
 	});
 	$("#note_contentInput").append("<h1>asd</h1>");
 	$("#note_contentInput").append("<h2><bold>asdasd</bold></h2>");
@@ -76,10 +78,44 @@ function addFileForm(){
 	}
 }
 
-function addTag(tag){
+function tagAction(tag){
 	if(selText.isCollapsed == 0){//드래그한 부분이 있을 때
-		selText.val() = "1111111"
-		$("#note_contentInput").append("<"+tag+">asdasd</"+tag+">");	
+		//alert(document.getSelection());
+		//alert(selText.focusNode)
+		
+		/* const range = document.createRange();
+		const newParent = document.createElement('h1');
+		
+		range.selectNode(document.querySelector('#note_contentInput'));
+		range.surroundContents(newParent); */
+		//txtRange = selText.getRangeAt;
+		//txtRange = document.body.createTextRange;
+		
+		
+		const selTextRange = selText.getRangeAt(0);
+		
+		//alert(selTextRange);
+		
+		const newNode = document.createElement(tag);
+		newNode.appendChild(selTextRange.extractContents());
+		selTextRange.insertNode(newNode);
+		
+		//alert(document.querySelector('#note_contentInput'));
+		//alert(txtRange.);
+		
+		//selText.collapseToStart();
+		//selText.focusNode.after("<"+tag+">"+selText+"</"+tag+">");
+		//selText.commonAncestorContainer = "<h1>...</h1>";
+		//alert(selText.commonAncestorContainer);
+		
+		//txtRange.surroundContents(document.createElement('h2'));
+		
+		//selText.focusNode.after("<h2>"+selText+"</h2>");
+		//$('h1').after("<"+tag+">"+selText+"</"+tag+">");
+		//selText.deleteFromDocument();
+		//alert($("bold"));
+		//$("bold").after("111");
+		//$("#note_contentInput").append("<"+tag+">asdasd</"+tag+">");
 	}
 }
 
@@ -94,8 +130,11 @@ function addTag(tag){
 		
 		<tr id="note_tools">
 			<td>
-				<button onclick="addTag('bold')">볼드</button>
-				<button onclick="addTag('brightPen')">형광펜</button>
+				<button onclick="tagAction('bold')">볼드</button>
+				<button onclick="tagAction('brightPen')">형광펜</button>
+				<button onclick="tagAction('h1')">h1</button>
+				<button onclick="tagAction('h2')">h2</button>
+				<button onclick="tagAction('h3')">h3</button>
 			</td>
 		</tr>
 		
@@ -112,9 +151,7 @@ function addTag(tag){
 		</tr>
 		
 		<tr id="note_contents">
-			<td>
-			<div contentEditable="true" id="note_contentInput"></div>
-			</td>
+			<td><div contentEditable="true" id="note_contentInput"></div></td>
 			<!-- <td><textarea placeholder="내용" name="note_content" id="note_contentInput" style="resize:none"></textarea></td> -->
 		</tr>
 		<tr>
