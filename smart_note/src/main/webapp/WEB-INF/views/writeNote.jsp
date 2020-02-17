@@ -99,7 +99,7 @@ function uploadPic(){
 			console.log(response);
 			$(function(){
 				$.ajax({
-					url: '/http:127.0.0.1:8000/polls/ocrtest',
+					url: '//127.0.0.1:8000/polls/ocr',
 					data: response,
 					dataType: 'json',
 					type: 'POST',
