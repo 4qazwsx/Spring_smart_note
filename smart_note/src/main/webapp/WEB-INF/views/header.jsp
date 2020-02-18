@@ -338,7 +338,7 @@ header a:active{color: black; text-decoration: none;}
       <li class="nav-item">
         <a class="nav-link" href="myNoteView.do">내 노트</a>
       </li>   <li class="nav-item">
-        <a class="nav-link" href="#">공유 노트</a>
+        <a class="nav-link" href="getBoardList.do">공유 노트</a>
       </li>
      
     </ul>
