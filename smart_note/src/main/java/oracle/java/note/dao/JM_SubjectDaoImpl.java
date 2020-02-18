@@ -16,8 +16,8 @@ public class JM_SubjectDaoImpl implements JM_SubjectDao {
 	
 	@Override
 	public List<Subject> dayListSelect(String mem_id) {
-		//return session.selectList("jm_subject_selectSubList", mem_id);
-		return session.selectList("jm_subject_selectSubList", "0");
+		return session.selectList("jm_subject_selectSubList", mem_id);
+		//return session.selectList("jm_subject_selectSubList", "0");
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package oracle.java.note.service;
 
 import java.util.List;
-
 import oracle.java.note.model.Subject;
 
 
@@ -9,12 +8,9 @@ import oracle.java.note.model.Subject;
 
 
 public interface IK_MynoteService {
-	
-	void addFavSub();
-	void delFavSubject(String mem_id, String sub_id, String note_id );
-    int total();
-    List<String> list(String sub_name);
-    Subject confirm(String sub_name);
-    List<Subject> select();
-   
+	List<Subject> dayListSelect(String mem_id);
+    List<Subject> select(String mem_id);
+    int confirm(Subject subject);
+    void insert(Subject subject);
+    void delete(Subject subject);
 }

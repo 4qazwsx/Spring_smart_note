@@ -282,15 +282,15 @@ public class JM_Controller {
 		return "redirect:schedule.do";
 	}
 	
-	@RequestMapping
-	public String subjectSetting(String sub_id, Model model) {
-		
-		Subject sub = ScheculeServ.subSelect(sub_id); 
-
-		model.addAttribute("subject", sub);
-		
-		return "subjectSetting";
-	}
+//	@RequestMapping
+//	public String subjectSetting(String sub_id, Model model) {
+//		
+//		Subject sub = ScheculeServ.subSelect(sub_id); 
+//
+//		model.addAttribute("subject", sub);
+//		
+//		return "subjectSetting";
+//	}
 	
 	//String[]을 받아서 ,를 찍어 String으로 반환해주는 메소드
 	private String mergeStringList(String[] list) {
