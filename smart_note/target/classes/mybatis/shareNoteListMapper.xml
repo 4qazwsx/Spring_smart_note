@@ -11,6 +11,8 @@
 			*
 		FROM
 			NOTE
+		WHERE 
+			NOTE_SHARE = 0
 		
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='note_title' and keyword != null and keyword != '' ">
@@ -32,7 +34,7 @@
 		FROM
 			NOTE
 		WHERE
-			NOTE_ID = #{note_id}
+			NOTE_SHARE = #{note_share}
 	</select>
 
 	<select id="getBoardListCnt" resultType="int">
