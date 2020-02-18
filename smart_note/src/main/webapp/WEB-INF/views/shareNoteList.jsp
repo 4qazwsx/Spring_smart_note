@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +13,11 @@
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
 integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
 crossorigin="anonymous">
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	function fn_contentView(note_id){
-		var url = "${pageContext.request.contextPath}/getBoardContent";
+		alert('asd')
+		var url = "${pageContext.request.contextPath}/getBoardContent.do";
 		url = url + "?note_id="+note_id;
 		location.href = url;
 	}
@@ -23,14 +25,14 @@ crossorigin="anonymous">
 	function fn_prev(page, range, rangeSize) {
 			var page = ((range - 2) * rangeSize) + 1;
 			var range = range - 1;
-			var url = "${pageContext.request.contextPath}/getBoardList";
+			var url = "${pageContext.request.contextPath}/getBoardList.do";
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 			location.href = url;
 		}
 	  //페이지 번호 클릭
 		function fn_pagination(page, range, rangeSize, searchType, keyword) {
-			var url = "${pageContext.request.contextPath}/getBoardList";
+			var url = "${pageContext.request.contextPath}/getBoardList.do";
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 			location.href = url;	
@@ -39,7 +41,7 @@ crossorigin="anonymous">
 		function fn_next(page, range, rangeSize) {
 			var page = parseInt((range * rangeSize)) + 1;
 			var range = parseInt(range) + 1;
-			var url = "${pageContext.request.contextPath}/getBoardList";
+			var url = "${pageContext.request.contextPath}/getBoardList.do";
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 			location.href = url;
@@ -63,7 +65,7 @@ crossorigin="anonymous">
 <article>
 	<div class="container">
 		<div class="table-responsive">
-<h2>board list</h2>
+<h2>공유노트리스트</h2>
 
 	 		<table class="table table-striped table-sm">
 				<colgroup>
@@ -77,7 +79,7 @@ crossorigin="anonymous">
 					<tr>
 						<th>NO</th>
 						<th>글제목</th>
-						<th>작성자</th>
+					<!-- 	<th>작성자</th> -->
 						<!-- <th>조회수</th> -->
 						<th>작성일</th>
 					</tr>
@@ -90,15 +92,16 @@ crossorigin="anonymous">
 						<c:when test="${!empty shareNoteList}">
 							<c:forEach var="list" items="${shareNoteList}">
 								<tr>
-									<td><c:out value="${list.note_id}"/></td>
+									<td><c:out value="${list.note_share}"/></td>
 									<td>
 										<a href="#" onClick="fn_contentView(<c:out value="${list.note_id}"/>)">
 											<c:out value="${list.note_title}"/>
 										</a>		
 									</td>
-									<td><c:out value="${list.mem_id}"/></td>
+									<%-- <td><c:out value="${list.mem_id}"/></td> --%>
 									<%-- <td><c:out value="${list.view_cnt}"/></td> --%>
-									<td><c:out value="${list.note_date}"/></td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.note_date}"/>
+									<%-- <td><c:out value="${list.note_date}"/></td> --%>
 								</tr>
 							</c:forEach>
 						</c:when>
