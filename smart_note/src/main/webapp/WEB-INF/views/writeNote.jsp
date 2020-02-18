@@ -53,17 +53,8 @@ $(document).ready(function(){
 		addFileForm();
 	});
 	$("#note_contentInput").mouseup(function(a){
-		//alert("selText->"+selText);
-		//alert("selText.ancherNode->"+selText.ancherNode);
-		//alert("selText.anchorOffset->"+selText.anchorOffset);
-		//alert("selText.focusNode->"+selText.focusNode);
-		//alert("selText.focusOffset->"+selText.focusOffset);
-		//alert("selText.isCollapsed->"+selText.isCollapsed);
-		//alert("selText.rangeCount->"+selText.rangeCount);
+		
 	});
-	$("#note_contentInput").append("<h1>asd</h1>");
-	$("#note_contentInput").append("<h2><bold>asdasd</bold></h2>");
-	$("#note_contentInput").append("asdasdasd");
 })
 
 function addFileForm(){
@@ -78,44 +69,27 @@ function addFileForm(){
 	}
 }
 
-function tagAction(tag){
-	if(selText.isCollapsed == 0){//드래그한 부분이 있을 때
-		//alert(document.getSelection());
-		//alert(selText.focusNode)
+function tagAction(tag){//추가할 태그의 이름을 매개변수로 받는 함수
+	if(selText.isCollapsed == 0){//드래그한 부분이 있을 때만 실행
 		
-		/* const range = document.createRange();
-		const newParent = document.createElement('h1');
+		const selTextRange = selText.getRangeAt(0);//선택 영역을 Range오브젝트로 선언
+		const parent_node = selTextRange.commonAncestorContainer.parentNode;//선택 영역의 부모 노드
+		const child_nodes = selTextRange.commonAncestorContainer.childNodes;//선택 영역의 자식 리스트
 		
-		range.selectNode(document.querySelector('#note_contentInput'));
-		range.surroundContents(newParent); */
-		//txtRange = selText.getRangeAt;
-		//txtRange = document.body.createTextRange;
-		
-		
-		const selTextRange = selText.getRangeAt(0);
-		
-		//alert(selTextRange);
-		
-		const newNode = document.createElement(tag);
-		newNode.appendChild(selTextRange.extractContents());
-		selTextRange.insertNode(newNode);
-		
-		//alert(document.querySelector('#note_contentInput'));
-		//alert(txtRange.);
-		
-		//selText.collapseToStart();
-		//selText.focusNode.after("<"+tag+">"+selText+"</"+tag+">");
-		//selText.commonAncestorContainer = "<h1>...</h1>";
-		//alert(selText.commonAncestorContainer);
-		
-		//txtRange.surroundContents(document.createElement('h2'));
-		
-		//selText.focusNode.after("<h2>"+selText+"</h2>");
-		//$('h1').after("<"+tag+">"+selText+"</"+tag+">");
-		//selText.deleteFromDocument();
-		//alert($("bold"));
-		//$("bold").after("111");
-		//$("#note_contentInput").append("<"+tag+">asdasd</"+tag+">");
+		if(parent_node.nodeName == tag.toUpperCase()){//이미 같은 태그가 적용된 곳일 경우
+			alert("tag 중복 감지");
+			for(var i = 0 ; i < child_nodes.length ; i++){
+				alert(child_nodes.item(i).nodeName);
+			}
+			
+		}else{//해당 태그가 적용되지 않은 영역일 경우
+			const newNode = document.createElement(tag);//새로운 노드를 만들어 태그 속성을 추가
+			for(var i = 0 ; i < child_nodes.length ; i++){
+				alert(child_nodes.item(i).nodeName);
+			}
+			newNode.appendChild(selTextRange.extractContents());//노드에 기존의 내용을 이동
+			selTextRange.insertNode(newNode);//선택영역에 노드를 삽입
+		}
 	}
 }
 
