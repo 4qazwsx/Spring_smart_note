@@ -133,7 +133,7 @@ function dragEvent(){
 			
 			window.open("schdulePopup.do?day="+day+"&start_time="+start_time+"&end_time="+end_time,
 						"과목 선택",
-						"width = 1000px, height = 650px, top = 50%, left = 50%, location = no, toolbars = no")
+						"width = 1000px, height = 657px, top = 50%, left = 50%, location = no, toolbars = no")
 			return;
 		}
 	});
