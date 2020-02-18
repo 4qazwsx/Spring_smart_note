@@ -13,6 +13,8 @@
       <mapper resource="mybatis/JM_Subject.xml"/>
 	  <mapper resource="mybatis/YJ_Members.xml" />
 	  <mapper resource="mybatis/Mynote.xml" />
+      <mapper resource="mybatis/shareNoteListMapper.xml"/> 
+      <mapper resource="mybatis/HJ_Note.xml"/> 
   </mappers>
 
 

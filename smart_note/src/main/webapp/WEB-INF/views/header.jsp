@@ -332,9 +332,9 @@ header a:active{color: black; text-decoration: none;}
 			<table class="menu_bar_table">
 				<tr>
 					<td onclick="location.href='main.do'">대 필 노트</td>
-					<td onclick="location.href='styleList.do?tagId=1&tagType=1'">내 필기관리</td>
-					<td onclick="location.href='bbs.do'">내 필기 공유</td>
-					<td onclick="myCogiMenuControler()">공유 노트</td>
+					<td onclick="location.href='myNoteView.do'">내 필기관리</td>
+					<td onclick="location.href='myNoteView.do'">내 필기 공유</td>
+					<td onclick="location.href='getBoardList.do'">공유 노트</td>
 				</tr>
 			</table>
 		</div>

@@ -17,29 +17,30 @@
 	</resultMap>
 
 
-<select id="listAll" resultType="String"> 
-       select sub_name From SUBJECT
-   </select>
-
-
-<select id="total" resultType="int"> 
-       select Count(*) From SUBJECT
-</select>
-
-<insert id="insert" parameterType="String">
-      INSERT into SUBJECT (SUB_NAME) VALUES (#{SUB_NAME})
-   
-   
-</insert> 
-
-<select id="confirmSub" resultType="String"> 
-       select SUB_NAME From SUBJECT where SUB_NAME = #{SUB_NAME}
-</select>
-
-<select id="TKselectDept" resultMap="SubjectResult">
-		select * from subject
+	<!-- <select id="listAll" resultType="String"> 
+	       select sub_name From SUBJECT 
+	   </select> -->
+	
+	
+	 <insert id="sub_insert" parameterType="Subject">
+	      insert into subject (sub_name, mem_id)  VALUES  (#{sub_name},#{mem_id})
+	   
+	   
+	</insert>  
+	
+	<!-- <select id="confirmSub" resultType="String"> 
+	       select SUB_NAME From SUBJECT where SUB_NAME = (#{SUB_NAME},jdbcType=VARCHAR)
+	</select> -->
+	
+	<select id="sub_select" resultType="Subject" parameterType="String">
+			select * from subject where mem_id = #{mem_id}
 	</select>
-
+	
+	<select id="sub_confirm" resultType="int" parameterType="Subject">
+			select  count(*) from subject where  sub_name = #{sub_name} and  mem_id = #{mem_id}
+	</select>
+	
+	
 
 
 </mapper>

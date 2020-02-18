@@ -10,13 +10,12 @@
 <%
 //response.sendRedirect("getshareNoteList.do");
 //response.sendRedirect("schedule.do");
-response.sendRedirect("HJ_Main.do");
-//response.sendRedirect("beforeMyNote.do");
-//response.sendRedirect("addSubForm.do");
 //response.sendRedirect("list.do");
-//response.sendRedirect("addFavSub.do");
-//response.sendRedirect("myNoteView.do");
+response.sendRedirect("myNoteView.do");
 //response.sendRedirect("note_Search.do");
+//response.sendRedirect("getBoardList.do");
+//response.sendRedirect("HJ_Main.do");
+//response.sendRedirect("loginForm2.do");
 %>
 </body>
 </html>
