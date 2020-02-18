@@ -12,8 +12,6 @@
 
 <%@include file="header.jsp" %>
 
-<%@include file="header.jsp" %>
-
 <table class="table table-striped" border="1" width="100%" >
 <th width="30%">제목</th><td>　</td>
 <tr><td colspan="2">

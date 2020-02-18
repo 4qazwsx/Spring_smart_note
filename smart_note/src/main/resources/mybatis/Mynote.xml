@@ -22,18 +22,14 @@
    </select>
 
 
-<select id="total" resultType="int"> 
-       select Count(*) From SUBJECT
-</select>
-
-<insert id="insert" parameterType="String">
+<!-- <insert id="insert" parameterType="String">
       INSERT into SUBJECT (SUB_NAME) VALUES (#{SUB_NAME})
    
    
-</insert> 
+</insert>  -->
 
 <select id="confirmSub" resultType="String"> 
-       select SUB_NAME From SUBJECT where SUB_NAME = #{SUB_NAME}
+       select SUB_NAME From SUBJECT where SUB_NAME = (#{SUB_NAME},jdbcType=VARCHAR)
 </select>
 
 <select id="TKselectDept" resultMap="SubjectResult">

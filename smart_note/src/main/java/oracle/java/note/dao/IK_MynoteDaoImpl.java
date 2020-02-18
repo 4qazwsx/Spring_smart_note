@@ -49,19 +49,18 @@ public class IK_MynoteDaoImpl implements IK_MynoteDao {
 		return list;
 	}
 
-	@Override
-	public String confirmSub() {
-		System.out.println("IK_MynoteDaoImpl updateCnt Start...");
-		// emp.xml-> id(total)  , return int 
-		return session.selectOne("confirmSub");
-	}
-
 	
-
 	@Override
 	public List<Subject> select() {
 		// TODO Auto-generated method stub
 		return session.selectList("TKselectDept");
+	}
+
+	@Override
+	public Subject confirm(String sub_name) {
+		System.out.println("IK_MynoteDaoImpl updateCnt Start...");
+		// emp.xml-> id(total)  , return int 
+		return session.selectOne("confirmSub");
 	}
 
 }
