@@ -18,6 +18,14 @@
 	width: 10%;
 	text-align: center;
 }
+#schedule_table th{
+	text-align: center;
+}
+
+#sub_title{
+	background-color: white;
+	font-weight: bold;
+}
 
 </style>
 
@@ -30,32 +38,8 @@ var drag_color = "#D5D5D5";
 //시간표 배경 색
 var bg_color = "white";
 
-//시간표 line 수 초기화
-var line = 9;
-
 //드래그 이벤트 상태 변수 / 1일 경우 드래그 중
 var drag = 0;
-
-function linePlus(){
-	//alert(line);
-	
-	//시간표 라인 수가 15 보다 작다면 새로운 행을 만든다.
-	if(line < 16) {
-		line++;
-		var trTd = $("<tr id='schedule_line_"+line+"'><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-		$("#schedule_table").append(trTd);
-	}
-	else alert("시간표가 너무 길어집니다.");
-	
-}
-function lineMinus(){
-	//시간표 라인 수가 0보다 크다면 행 삭제 불가
-	if(line > 0) {
-		$("#schedule_line_"+line).remove();
-		line--;
-	}
-	
-}
 
 function dragEvent(){
 	//
@@ -139,20 +123,6 @@ function dragEvent(){
 	});
 }
 
-/* function deleteSubjectTime(sub_id){
-	alert(sub_id);
-	
-	$.ajax({
-		
-		url : "deleteSubjectTime.do",
-		data : "sub_id=" + sub_id,
-		success : function(s){
-			//reload();
-		}
-		
-	})
-} */
-
 function subjectSetting(sub_id){
 	window.open("subjectSetting.do?sub_id="+sub_id,
 			"과목 설정",
@@ -186,7 +156,7 @@ $(document).ready(function(){
 					class="schedule_event"
 					id="schedule_${day}_${sub}"
 					onmousedown="">
-					<p bgcolod="white">${daysSubList[day][sub].getSub_name()}</p>
+					<p id="sub_title">${daysSubList[day][sub].getSub_name()}</p>
 					<c:if test="${daysSubList[day][sub] != null }">
 						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">시간표에서 빼기</button>
 						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">필기목록</button>

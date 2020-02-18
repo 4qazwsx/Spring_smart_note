@@ -5,6 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>과목 설정</title>
+<style type="text/css">
+#popup_body{
+	text-align: center;
+}
+</style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 function subjectSettingSubmit(){
@@ -32,13 +37,15 @@ function delectSubjectSubmit(){
 </script>
 </head>
 <body>
-<h2>${subject.getSub_name()}</h2>
-<form id="subjectSettingForm" action="subjectSettingSubmit()">
-<input hidden="hidden"/>
-<input type="hidden" name="sub_id" value="${subject.getSub_id() }">
-<p>과목 색 <input type="text" name="sub_color" value="${subject.getSub_color() }"></p>
-</form>
-<button onclick="subjectSettingSubmit()">확인</button>
-<button onclick="delectSubjectSubmit()">과목 삭제</button>
+<div id="popup_body">
+	<h2>${subject.getSub_name()}</h2>
+	<form id="subjectSettingForm" action="subjectSettingSubmit()">
+		<input hidden="hidden"/>
+		<input type="hidden" name="sub_id" value="${subject.getSub_id() }">
+		<p>과목 색 <input type="text" name="sub_color" value="${subject.getSub_color() }"></p>
+	</form>
+	<button onclick="subjectSettingSubmit()">확인</button>
+	<button onclick="delectSubjectSubmit()">과목 삭제</button>
+</div>
 </body>
 </html>
