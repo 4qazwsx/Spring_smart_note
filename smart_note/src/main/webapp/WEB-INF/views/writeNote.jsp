@@ -49,12 +49,15 @@ var i = 1;
 var selText = window.getSelection();
 
 $(document).ready(function(){
-	$("input").change(function(){
+	$("input").change(function(){//input 내용이 바뀔때마다
 		addFileForm();
 	});
+	/* $("div").change(function(){
+		addContent();
+	})
 	$("#note_contentInput").mouseup(function(a){
 		
-	});
+	}); */
 })
 
 function addFileForm(){
@@ -93,6 +96,10 @@ function tagAction(tag){//추가할 태그의 이름을 매개변수로 받는 �
 	}
 }
 
+function addContent(){
+	$("#note_content").val($("#note_contentInput").html());
+}
+
 </script>
 
 </head>
@@ -109,10 +116,11 @@ function tagAction(tag){//추가할 태그의 이름을 매개변수로 받는 �
 				<button onclick="tagAction('h1')">h1</button>
 				<button onclick="tagAction('h2')">h2</button>
 				<button onclick="tagAction('h3')">h3</button>
+				<button onclick="asd()">aaaaaaaaaaaa</button>
 			</td>
 		</tr>
 		
-		<form action="" enctype="multipart/form-data" method="post" id="noteForm">
+		<form action="noteSave.do" enctype="multipart/form-data" method="post" id="noteForm">
 		
 		<tr id="note_title">
 			<td><input type="text" placeholder="제목" name="note_title" id="note_titleInput"></td>
@@ -126,10 +134,13 @@ function tagAction(tag){//추가할 태그의 이름을 매개변수로 받는 �
 		
 		<tr id="note_contents">
 			<td><div contentEditable="true" id="note_contentInput"></div></td>
-			<!-- <td><textarea placeholder="내용" name="note_content" id="note_contentInput" style="resize:none"></textarea></td> -->
+			<td><input type="hidden" name="note_contents" id="note_contents"></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="저장"></td>
+			<td>
+				<input type="hidden" name="sub_id" value="${param.sub_id }">
+				<input onclick="addContent()" type="submit" value="저장">
+			</td>
 		</tr>
 		</form>
 		

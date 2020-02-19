@@ -4,8 +4,6 @@ import java.util.Date;
 
 public class Note {
 	String note_id;
-	String sub_id;
-	String mem_id;
 	String note_title;
 	String note_contents;
 	Date note_date;
@@ -16,18 +14,6 @@ public class Note {
 	}
 	public void setNote_id(String note_id) {
 		this.note_id = note_id;
-	}
-	public String getSub_id() {
-		return sub_id;
-	}
-	public void setSub_id(String sub_id) {
-		this.sub_id = sub_id;
-	}
-	public String getMem_id() {
-		return mem_id;
-	}
-	public void setMem_id(String mem_id) {
-		this.mem_id = mem_id;
 	}
 	public String getNote_title() {
 		return note_title;

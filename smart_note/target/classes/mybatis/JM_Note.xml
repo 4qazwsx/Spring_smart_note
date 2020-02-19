@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="JM_Note">
+
+	<insert id="jm_note_insert" parameterType="Note">
+		INSERT INTO note VALUES (NOTE_ID.NEXTVAL, #{note_title}, #{note_contents}, sysdate, 1)
+	</insert>
+	
+	<insert id="jm_subNoteMapping_insert" parameterType="Subject_Note_Mapping">
+		INSERT INTO subject_note_mapping VALUES (#{sub_id}, #{mem_id}, NOTE_ID.CURRVAL)
+	</insert>
+
+</mapper>

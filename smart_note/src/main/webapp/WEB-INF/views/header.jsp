@@ -321,7 +321,7 @@ header a:active{color: black; text-decoration: none;}
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap-theme.min.css"> --%>
 
 <!-- common CSS -->
-<link rel="stylesheet" href="<c:url value='/resources/common/css/common.css'/>" >
+<%-- <link rel="stylesheet" href="<c:url value='/resources/common/css/common.css'/>" > --%>
 
 <!--메뉴바 추가 부분-->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
