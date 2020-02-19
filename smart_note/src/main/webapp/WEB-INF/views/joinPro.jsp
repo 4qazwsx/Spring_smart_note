@@ -8,17 +8,18 @@
 <title>회원 가입</title>
 </head>
 <body>
-<%
-
-//response.sendRedirect("list.do");
-//response.sendRedirect("listEmp.do");
-//response.sendRedirect("writeDeptCursor.do");
-//response.sendRedirect("writeDeptIn.do");
-//response.sendRedirect("insertEmp.do");
-//response.sendRedirect("interCepterForm.do");
-response.sendRedirect("main.do");
-
-%>
-
+<title>회원 가입</title></head><body>
+	<c:if test="${result ==1 }">
+		<script type="text/javascript">
+			alert("회원가입에 성공하였습니다.");  
+			location.href="schedule.do";
+		</script>
+	</c:if>
+	<c:if test="${result == 0 }">  
+		<script type="text/javascript">
+			alert("회원가입에 실패하였습니다");  
+			history.go(-1);
+		</script>
+	</c:if>
 </body>
 </html>

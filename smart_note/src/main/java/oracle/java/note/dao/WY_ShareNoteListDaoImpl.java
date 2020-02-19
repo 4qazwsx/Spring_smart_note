@@ -27,7 +27,7 @@ public class WY_ShareNoteListDaoImpl implements WY_ShareNoteListDao {
 	@Override
 	public Note getBoardContent(int note_id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne("getBoardContent", note_id);
 	}
 
 	@Override

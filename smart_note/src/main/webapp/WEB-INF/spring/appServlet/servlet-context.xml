@@ -29,4 +29,8 @@
         <beans:constructor-arg value="C:\\log\\upload"></beans:constructor-arg>
     </beans:bean>
 
+
+
+
+<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
 </beans:beans>

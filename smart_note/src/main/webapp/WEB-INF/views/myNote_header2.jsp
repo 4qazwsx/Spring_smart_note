@@ -312,6 +312,132 @@ header a:active{color: black; text-decoration: none;}
 #hot_tag_list a:visited{text-decoration: none; color: #666666;}
 #hot_tag_list a:hover{text-decoration: none; color: #666666;}
 
+
+
+/* #topMenu {  height: 30px;  width: 850px;  } 
+#topMenu ul li {  list-style: none;  
+                      color: white; background-color: #2d2d2d; 
+                      float: left;  line-height: 30px; 
+                      vertical-align: middle; 
+                       text-align: center;  } 
+#topMenu .menuLink { text-decoration:none;  
+                             color: white;  display: block; 
+                             width: 150px; 
+                             font-size: 12px; 
+                              font-weight: bold; 
+                              font-family: "Trebuchet MS", Dotum, Arial;  } 
+#topMenu .menuLink:hover {   color: red;  
+                                background-color: #4d4d4d;  } */
+
+
+
+#container {
+    list-style:none; 
+    margin:0;
+    padding:0; 
+   /*  background-color: #5D5D5D; */
+    
+} 
+
+.aa {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+}
+
+.bb {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: right;
+}
+
+/* .cc {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    position:absolute;
+
+    top:7%; 
+background-color: #5D5D5D;
+    right:35%;
+} */
+
+
+
+
+
+
+#note_Search {
+
+    width:650px;
+
+    background-color: #5D5D5D;
+
+    border: none;
+
+    color:#FFFFFF; 
+
+   /*  padding: 15px 0; */
+
+    text-align: center; 
+
+    text-decoration: none; 
+
+    display: inline-block;
+
+    font-size: 17px;
+
+   /*  margin: 6px; */
+
+    cursor: pointer;
+
+
+}
+
+
+#submit {
+
+    width:50px;
+
+    background-color: #5D5D5D;
+
+    border: none;
+
+    color:#FFFFFF; 
+
+   /*  padding: 15px 0; */
+
+    text-align: center;
+
+    text-decoration: none; 
+
+    display: inline-block;
+
+    font-size: 17px;
+
+   /*  margin: 6px; */
+
+    cursor: pointer;
+
+
+}
+
+#frm{
+
+background-color: #5D5D5D;
+
+}
+
+
+
+
+
+
+
+
+
 /* header style end */
 </style>
 <!-- Bootstrap CSS -->
@@ -325,7 +451,7 @@ header a:active{color: black; text-decoration: none;}
 
 <!--메뉴바 추가 부분-->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" href="schedule.do">대 필 NOTE</a>
+  <a class="navbar-brand" href="schedule.do">My NOTE</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -336,14 +462,15 @@ header a:active{color: black; text-decoration: none;}
         <a class="nav-link" href="schedule.do">MAIN <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="myNoteView.do">내 노트</a>
+        <!-- <a class="nav-link" href="myNoteView.do">내 노트</a> -->
+        <!-- <input type="button" value="내 노트 열기" id="note_Search" onclick="note_Search()" > -->
       </li>   <li class="nav-item">
         <a class="nav-link" href="getBoardList.do">공유 노트</a>
       </li>
      
     </ul>
   </div>
-  
+   
 <div id="header_root">
 	<div id="member_space">
 		<c:if test="${empty sessionScope.mem_id }">
@@ -356,4 +483,27 @@ header a:active{color: black; text-decoration: none;}
 			<button id="top_my_page_button" class="top_right_button" onclick="myCogiMenuControler()" >회원정보수정</button>
 		</c:if>
 	</div>
+
 </nav>
+
+<div> 
+ <ul id ="container">
+    <!-- <li class ="aa"><h4>내 노트 </h4></li>  -->
+    <li class ="aa"><input type="button"  value="내 노트 열기" id="note_Search" onclick="note_Search()" ></li> 
+    <li class ="bb"><form action="" name="frm" id="frm">
+		 <!-- <h4 class ="cc">내 노트 </h4> -->
+		 <input type="text" name="sub_name" id="sub_name" placeholder="추가하고 싶은 과목 입력"> 		
+		 <input type="button" value="확인" id="submit" onclick="addSub()">   
+	    </form>
+    </li> 
+    
+ </ul> 
+</div> 
+
+
+
+
+
+
+
+

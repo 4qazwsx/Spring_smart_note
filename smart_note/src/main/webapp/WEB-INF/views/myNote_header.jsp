@@ -378,7 +378,7 @@ header a:active{color: black; text-decoration: none;}
 					<td onclick="location.href='myNoteView.do'">내 필기 공유</td>
 					<td onclick="location.href='getBoardList.do'">공유 노트</td> 
 				    <td><form action="" name="frm" id="frm">
-		                <input type="text" name="sub_name" id="sub_name"> 		
+		                <input type="text" name="sub_name" id="sub_name" placeholder="추가하고 싶은 과목 입력"> 		
 		                <input type="button" value="확인" id="submit" onclick="addSub()">   <!-- addSub() -->    <!-- sub_insert() -->
 	                    </form></td> 
 				</tr>				

@@ -27,10 +27,12 @@ public class WY_ShareNoteListServiceImpl implements WY_ShareNoteListService {
 	@Override
 	public Note getBoardContent(int note_id) throws Exception {
 		// TODO Auto-generated method stub
-		Note note = new Note();
+		shareNoteListDAO.updateViewCnt(note_id);
+		return shareNoteListDAO.getBoardContent(note_id);
+		/*Note note = new Note();
 		shareNoteListDAO.updateViewCnt(note_id);
 		note = shareNoteListDAO.getBoardContent(note_id);
-		return note;
+		return note.getNote_contents(note_id);*/
 	}
 
 	@Override

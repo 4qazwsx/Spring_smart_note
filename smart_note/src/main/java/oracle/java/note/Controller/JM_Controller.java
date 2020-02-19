@@ -1,8 +1,5 @@
 package oracle.java.note.Controller;
 
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,82 +26,83 @@ public class JM_Controller {
 		//세션의 mem_id 불러오기
 		HttpSession session = request.getSession();
 		String mem_id = (String) session.getAttribute("mem_id");
-		
-		//List<Subject> subList = ScheculeServ.dayListSelect(mem_id);
-		List<Subject> subList = ScheculeServ.dayListSelect("0");
-		
-		Subject[][] daysSubList = new Subject[7][15];
-		int index = 0;
-		int sub_time = 0;
-		int start_time = 0;
-		
-		//과목 전체 확장 for 문
-		for(Subject sub : subList) {
-			//과목의 요일 마다 for 문
-			index = 0;
-			if(sub.getSub_day() != null) {//day가 null값이 아닐경우 실행 / 시간표에 등록된 과목만 실행
-				for(String day : sub.getSub_day().split(",")) {
-					//switch문으로 해당 요일의 과목 리스트에 집어넣기
-					switch(Integer.parseInt(day)) {
-						case 0 :
-							//해당 요일에 맞는 수업시간 값들(index를 통해 구분)
-							sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
-							start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
-							//수업시작시간부터 수업끝시간(시작시간+진행시간)까지 for 루프로 배열에 Subject 저장 
-							for(int i=start_time ; i < start_time+sub_time ; i++ ) {
-								daysSubList[0][i] = sub;
-							}
-							break;
-						case 1 :
-							sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
-							start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
-							for(int i=start_time ; i < start_time+sub_time ; i++ ) {
-								daysSubList[1][i] = sub;
-							}
-							break;
-						case 2 :
-							sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
-							start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
-							for(int i=start_time ; i < start_time+sub_time ; i++ ) {
-								daysSubList[2][i] = sub;
-							}
-							break;
-						case 3 :
-							sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
-							start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
-							for(int i=start_time ; i < start_time+sub_time ; i++ ) {
-								daysSubList[3][i] = sub;
-							}
-							break;
-						case 4 :
-							sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
-							start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
-							for(int i=start_time ; i < start_time+sub_time ; i++ ) {
-								daysSubList[4][i] = sub;
-							}
-							break;
-						case 5 :
-							sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
-							start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
-							for(int i=start_time ; i < start_time+sub_time ; i++ ) {
-								daysSubList[5][i] = sub;
-							}
-							break;
-						case 6 :
-							sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
-							start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
-							for(int i=start_time ; i < start_time+sub_time ; i++ ) {
-								daysSubList[6][i] = sub;
-							}
-							break;
-						default :
-							System.out.println("없는 요일입니다.");
-					}
-					//for문을 끝내면서 index값 증가
-					index++;
-				}
-			}
+		Subject[][] daysSubList = new Subject[7][15];//리턴할 리스트
+
+		if(mem_id != null) {//로그인되어 있을 때만 실행
 			
+			List<Subject> subList = ScheculeServ.dayListSelect(mem_id);
+			int index = 0;
+			int sub_time = 0;
+			int start_time = 0;
+			
+			//과목 전체 확장 for 문
+			for(Subject sub : subList) {
+				//과목의 요일 마다 for 문
+				index = 0;
+				if(sub.getSub_day() != null) {//day가 null값이 아닐경우 실행 / 시간표에 등록된 과목만 실행
+					for(String day : sub.getSub_day().split(",")) {
+						//switch문으로 해당 요일의 과목 리스트에 집어넣기
+						switch(Integer.parseInt(day)) {
+							case 0 :
+								//해당 요일에 맞는 수업시간 값들(index를 통해 구분)
+								sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
+								start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
+								//수업시작시간부터 수업끝시간(시작시간+진행시간)까지 for 루프로 배열에 Subject 저장 
+								for(int i=start_time ; i < start_time+sub_time ; i++ ) {
+									daysSubList[0][i] = sub;
+								}
+								break;
+							case 1 :
+								sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
+								start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
+								for(int i=start_time ; i < start_time+sub_time ; i++ ) {
+									daysSubList[1][i] = sub;
+								}
+								break;
+							case 2 :
+								sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
+								start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
+								for(int i=start_time ; i < start_time+sub_time ; i++ ) {
+									daysSubList[2][i] = sub;
+								}
+								break;
+							case 3 :
+								sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
+								start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
+								for(int i=start_time ; i < start_time+sub_time ; i++ ) {
+									daysSubList[3][i] = sub;
+								}
+								break;
+							case 4 :
+								sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
+								start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
+								for(int i=start_time ; i < start_time+sub_time ; i++ ) {
+									daysSubList[4][i] = sub;
+								}
+								break;
+							case 5 :
+								sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
+								start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
+								for(int i=start_time ; i < start_time+sub_time ; i++ ) {
+									daysSubList[5][i] = sub;
+								}
+								break;
+							case 6 :
+								sub_time = Integer.parseInt(sub.getSub_time().split(",")[index]);
+								start_time = Integer.parseInt(sub.getSub_start().split(",")[index]);
+								for(int i=start_time ; i < start_time+sub_time ; i++ ) {
+									daysSubList[6][i] = sub;
+								}
+								break;
+							default :
+								System.out.println("없는 요일입니다.");
+						}
+						//for문을 끝내면서 index값 증가
+						index++;
+					}
+				}
+				
+			}
 		}
 		
 		model.addAttribute("daysSubList", daysSubList);
@@ -113,14 +111,22 @@ public class JM_Controller {
 	}
 	
 	@RequestMapping(value="schdulePopup")
-	public String schduleAddSub(Model model) {
+	public String schduleAddSub(Model model, HttpServletRequest request) {
 		
-		//List<Subject> subList = ScheculeServ.dayListSelect(mem_id);
-		List<Subject> subList = ScheculeServ.dayListSelect("0");
-
-		model.addAttribute("subList", subList);
+		//세션의 mem_id 불러오기
+		HttpSession session = request.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
+		String returnUrl = "loginForm2";
 		
-		return "schdulePopup";
+		if(mem_id != null) {
+			List<Subject> subList = ScheculeServ.dayListSelect(mem_id);
+			model.addAttribute("subList", subList);
+			returnUrl = "schdulePopup";
+		}else {
+			returnUrl = "loginForm2";
+		}
+		
+		return returnUrl;
 
 	}
 	
@@ -196,17 +202,17 @@ public class JM_Controller {
 			newSubTime.setSub_time(add_sub_time);
 		}
 		
-		ScheculeServ.updateSchduleTime(newSubTime);
+		ScheculeServ.updateSubject(newSubTime);
 		
 		return "";
 	}
 	
 	@RequestMapping(value="newSubject")
+	@ResponseBody
 	public String newSubject(String sub_name, String sub_description, HttpServletRequest request) {
 		//세션의 mem_id 불러오기
-		/*HttpSession session = request.getSession();
-		String mem_id = (String) session.getAttribute("mem_id");*/
-		String mem_id = "0";
+		HttpSession session = request.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
 		String sub_id = createSubId(mem_id);
 		
 		System.out.println("sub_id->"+sub_id);
@@ -221,7 +227,7 @@ public class JM_Controller {
 		
 		ScheculeServ.insertSubject(sub);
 		
-		return "redirect:schdulePopup.do";
+		return sub_id;
 	}
 	
 	@RequestMapping(value="deleteSubjectTime")
@@ -275,13 +281,14 @@ public class JM_Controller {
 			newSub.setSub_start(mergeStringList(newSubStartList));
 			newSub.setSub_time(mergeStringList(newSubTimeList));
 			
-			ScheculeServ.updateSchduleTime(newSub);
+			ScheculeServ.updateSubject(newSub);
 
 		}
 		
 		return "redirect:schedule.do";
 	}
 	
+
 //	@RequestMapping
 //	public String subjectSetting(String sub_id, Model model) {
 //		
@@ -291,6 +298,51 @@ public class JM_Controller {
 //		
 //		return "subjectSetting";
 //	}
+
+	@RequestMapping(value="subjectSetting")
+	public String subjectSetting(String sub_id, Model model) {
+		
+		Subject sub = ScheculeServ.subSelect(sub_id); 
+
+		model.addAttribute("subject", sub);
+		
+		return "subjectSetting";
+	}
+	@RequestMapping(value="changeSubjectSetting")
+	@ResponseBody
+	public String changeSubjectSetting(String sub_id, String sub_color) {
+		System.out.println("sub_color->"+sub_color);
+		System.out.println("sub_color->"+sub_id);
+		
+		Subject sub = new Subject();
+		
+		sub.setSub_id(sub_id);
+		sub.setSub_color(sub_color);
+		
+		ScheculeServ.updateSubject(sub);
+		
+		return "";
+	}
+	@RequestMapping(value="delectSubject")
+	@ResponseBody
+	public String delectSubject(String sub_id) {
+		
+		ScheculeServ.deleteSubject(sub_id);
+		
+		return "";
+	}
+	
+	//필기작성 컨트롤러
+	@RequestMapping(value="writeNote")
+	public String writeNote(String sub_id) {
+		
+		if(sub_id == null) {
+			System.out.println("과목 아이디 정보가 없습니다.");
+		}
+		
+		return "writeNote";
+	}
+
 	
 	//String[]을 받아서 ,를 찍어 String으로 반환해주는 메소드
 	private String mergeStringList(String[] list) {

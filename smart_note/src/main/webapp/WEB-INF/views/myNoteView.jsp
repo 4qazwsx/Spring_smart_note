@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="myNote_header.jsp"%>
+<%@ include file="myNote_header2.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
@@ -23,7 +23,7 @@
 <table id="content" class="hide">
     <thead>    
     </thead> 
-    <tbody> 
+    <tbody class="list_body"> 
          {{#subject}}
         <tr>
            
@@ -81,7 +81,7 @@ function note_Search(){
 		dataType:'json',
 		success:function(data){
 			var jsondata = JSON.stringify(data);
-	        alert("jsondata->"+jsondata); 
+	        /* alert("jsondata->"+jsondata);  */
 			$('#Dept_list').append(jsondata);  
 			
 			//핸들바 템플릿 가져오기
@@ -287,7 +287,7 @@ document.onkeydown = noRefresh;
 
     display: inline-block;
 
-    font-size: 15px;
+    font-size: 17px;
 
     margin: 4px;
 
@@ -300,13 +300,91 @@ document.onkeydown = noRefresh;
     background-color: #D4F4FA;
 }
 
-/* .a{
+
+.del_button {
+
+    width:20px;
+
+    background-color: #E4F7BA;
+
+    border: none;
+
+    color:#000000; 
+
+    padding: 5px 0;
+
+    text-align: center;
+
+    text-decoration: none; 
+
+    display: inline-block;
+
+    font-size: 10px;
+
+    margin: 4px;
+
+    cursor: pointer;
+
+    /* border-radius:10px; */
+}
+
+#content {
+height: 10%;  
+
+
+
+}
+
+.list_body{
 position:absolute;
 
-bottom:70px;
+top:15%;
 
-left:10px;
-} */
+left:265px;
+
+}
+
+.my{
+position:absolute;
+
+top:13%;
+
+left:95px;
+
+}
+
+#fav{
+position:absolute;
+
+top:7%; 
+
+right:35%;
+
+}
+
+
+#fav_tab{
+
+
+top:40%;
+
+right:30px;
+
+}
+
+#dynamicTable{
+
+position:absolute;
+
+top:15%;
+
+left:40%;
+
+}
+
+
+
+
 
 
 </style>
@@ -317,15 +395,14 @@ left:10px;
 </head>
 
 <body>
-<h1>내 노트</h1>
-<div id="Dept_list3"></div>
+<!-- <h3 class="my">내 노트 </h3>  -->
+ <div id="Dept_list3"></div>  
 	
-	<div>
+	<div id="fav_tab">
 		<table style="border: 1px;" id="dynamicTable">
 			<thead>
 				<tr>
-					<th><h1>선호 과목</h1></th>
-                    
+					<th></th> 
 				</tr>
 			</thead>	
 		</table>
@@ -333,7 +410,7 @@ left:10px;
 
 
 
-
+<h4 id = "fav">추가과목</h4>
 
 
 
