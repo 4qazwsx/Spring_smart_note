@@ -16,7 +16,6 @@ crossorigin="anonymous">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	function fn_contentView(note_id){
-		alert('asd')
 		var url = "${pageContext.request.contextPath}/getBoardContent.do";
 		url = url + "?note_id="+note_id;
 		location.href = url;
