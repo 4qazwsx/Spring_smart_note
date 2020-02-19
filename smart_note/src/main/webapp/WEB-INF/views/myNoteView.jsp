@@ -273,7 +273,7 @@ document.onkeydown = noRefresh;
 
     width:100px;
 
-    background-color: #FAE0D4;
+    background-color: #B2CCFF;
 
     border: none;
 
@@ -305,7 +305,7 @@ document.onkeydown = noRefresh;
 
     width:20px;
 
-    background-color: #E4F7BA;
+    background-color: #E8D9FF;
 
     border: none;
 
@@ -360,6 +360,10 @@ top:7%;
 
 right:35%;
 
+color:#FFFFFF;
+
+
+
 }
 
 
@@ -410,7 +414,7 @@ left:40%;
 
 
 
-<h4 id = "fav">추가과목</h4>
+<h5 id = "fav">추가과목</h5>
 
 
 

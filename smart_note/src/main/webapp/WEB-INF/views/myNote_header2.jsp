@@ -396,6 +396,14 @@ background-color: #5D5D5D;
 
 }
 
+#note_Search:hover {
+    background-color: #BDBDBD;
+}
+
+
+
+
+
 
 #submit {
 
@@ -486,7 +494,7 @@ background-color: #5D5D5D;
 
 </nav>
 
-<div> 
+<div style="height:29px; background-color: #8C8C8C"> 
  <ul id ="container">
     <!-- <li class ="aa"><h4>내 노트 </h4></li>  -->
     <li class ="aa"><input type="button"  value="내 노트 열기" id="note_Search" onclick="note_Search()" ></li> 
