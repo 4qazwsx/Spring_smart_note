@@ -31,7 +31,7 @@
 #note_contentInput{
 	height: 100%;
 	width: 100%;
-	border: 1px solid black;
+	border: 1px solid #8C8C8C;
 }
 
 bold{
@@ -72,6 +72,16 @@ function addFileForm(){
 	}
 }
 
+function sameTagSearch(tag){
+	var result = 0;//0은 없음 1은 있음
+	
+	if(parent_node.nodeName == tag.toUpperCase()){
+		result = 1;
+	}
+	
+	return result;
+}
+
 function tagAction(tag){//추가할 태그의 이름을 매개변수로 받는 함수
 	if(selText.isCollapsed == 0){//드래그한 부분이 있을 때만 실행
 		
@@ -97,7 +107,7 @@ function tagAction(tag){//추가할 태그의 이름을 매개변수로 받는 �
 }
 
 function addContent(){
-	$("#note_content").val($("#note_contentInput").html());
+	$("#note_contents_value").val($("#note_contentInput").html());
 }
 
 </script>
@@ -116,7 +126,6 @@ function addContent(){
 				<button onclick="tagAction('h1')">h1</button>
 				<button onclick="tagAction('h2')">h2</button>
 				<button onclick="tagAction('h3')">h3</button>
-				<button onclick="asd()">aaaaaaaaaaaa</button>
 			</td>
 		</tr>
 		
@@ -134,7 +143,7 @@ function addContent(){
 		
 		<tr id="note_contents">
 			<td><div contentEditable="true" id="note_contentInput"></div></td>
-			<td><input type="hidden" name="note_contents" id="note_contents"></td>
+			<td><input type="hidden" name="note_contents" id="note_contents_value"></td>
 		</tr>
 		<tr>
 			<td>
