@@ -68,6 +68,7 @@ function addFileForm(){
 	if($("#file"+i).val()){//파일이 있으면
 		i++;
 		uploadPic();
+		window.open("//127.0.0.1:8000/polls/")
 		$("#note_uploadFileList").append("<br><input type='file' name='file' id='file"+i+"'>");
 		$(document).ready(function(){//새로 만든 input 태그에 이벤트 갱신
 			$("input").change(function(){
@@ -97,9 +98,9 @@ function uploadPic(){
 		success: function(response){
 			alert("success");
 			console.log(response);
-			$(function(){
+			/* $(function(){
 				$.ajax({
-					url: '//127.0.0.1:8000/polls/ocr',
+					url: '//127.0.0.1:8000/polls/ocrtest',
 					data: response,
 					dataType: 'json',
 					type: 'POST',
@@ -107,7 +108,7 @@ function uploadPic(){
 						alert("끝");
 					}
 				})
-			})
+			}) */
 		},error:function(jqXHR){
 			alert(jqXHR.responseText);
 		}
