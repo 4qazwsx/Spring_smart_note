@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
+<!-- jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ -->
+ <%-- <script src="${pageContext.request.contextPath}/resources/common/js/jquery-3.3.1.min.js" ></script> --%>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
 
 <!-- session이 없으면(비로그인시) 디폴트 값으로 서울의 날씨 코드를 넣어준다. -->
 <c:if test="${sessionScope.loc == null}">
@@ -40,7 +43,8 @@
 		} */
 		
 		if(thisPage == "logout.do"){
-			history.pushState(null,null,"main.do");
+			history.pushState(null,null,"schedule.do");
+			window.location.reload();
 		}	
 	})
 	
@@ -68,7 +72,6 @@
 	}
 
 </script>
-
 <style type="text/css">
 /* theme color list
 	#E45151	
@@ -311,44 +314,174 @@ header a:active{color: black; text-decoration: none;}
 
 
 
+/* #topMenu {  height: 30px;  width: 850px;  } 
+#topMenu ul li {  list-style: none;  
+                      color: white; background-color: #2d2d2d; 
+                      float: left;  line-height: 30px; 
+                      vertical-align: middle; 
+                       text-align: center;  } 
+#topMenu .menuLink { text-decoration:none;  
+                             color: white;  display: block; 
+                             width: 150px; 
+                             font-size: 12px; 
+                              font-weight: bold; 
+                              font-family: "Trebuchet MS", Dotum, Arial;  } 
+#topMenu .menuLink:hover {   color: red;  
+                                background-color: #4d4d4d;  } */
 
 
-#note_Search{
-  background:#FFBB00;
-  color:#fff; 
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:20px;
-  padding:0 30px;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
+
+#container {
+    list-style:none; 
+    margin:0;
+    padding:0; 
+   /*  background-color: #5D5D5D; */
+    
+} 
+
+.aa {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
 }
 
-#submit{
-  background:#FFBB00;
-  color:#fff; 
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:20px;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
+.bb {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: right;
 }
+
+/* .cc {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    position:absolute;
+
+    top:7%; 
+background-color: #5D5D5D;
+    right:35%;
+} */
+
+
+
+
+
+
+#note_Search {
+
+    width:650px;
+
+    background-color: #5D5D5D;
+
+    border: none;
+
+    color:#FFFFFF; 
+
+   /*  padding: 15px 0; */
+
+    text-align: center; 
+
+    text-decoration: none; 
+
+    display: inline-block;
+
+    font-size: 17px;
+
+   /*  margin: 6px; */
+
+    cursor: pointer;
+
+
+}
+
+#note_Search:hover {
+    background-color: #BDBDBD;
+}
+
+
+
+
+
+
+#submit {
+
+    width:50px;
+
+    background-color: #5D5D5D;
+
+    border: none;
+
+    color:#FFFFFF; 
+
+   /*  padding: 15px 0; */
+
+    text-align: center;
+
+    text-decoration: none; 
+
+    display: inline-block;
+
+    font-size: 17px;
+
+   /*  margin: 6px; */
+
+    cursor: pointer;
+
+
+}
+
+#frm{
+
+background-color: #5D5D5D;
+
+}
+
+
+
+
+
+
 
 
 
 /* header style end */
 </style>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<header>
+<!-- Bootstrap theme -->
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap-theme.min.css"> --%>
 
+<!-- common CSS -->
+<link rel="stylesheet" href="<c:url value='/resources/common/css/common.css'/>" >
+
+<!--메뉴바 추가 부분-->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand" href="schedule.do">My NOTE</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExample03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="schedule.do">MAIN <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <!-- <a class="nav-link" href="myNoteView.do">내 노트</a> -->
+        <!-- <input type="button" value="내 노트 열기" id="note_Search" onclick="note_Search()" > -->
+      </li>   <li class="nav-item">
+        <a class="nav-link" href="getBoardList.do">공유 노트</a>
+      </li>
+     
+    </ul>
+  </div>
+   
 <div id="header_root">
 	<div id="member_space">
-		<%-- <c:if test="${empty sessionScope.mem_id }">
+		<c:if test="${empty sessionScope.mem_id }">
 			<button id="top_login_button" class="top_left_button" onclick="login()">로그인</button>
 			<button id="top_signup_button" class="top_right_button" onclick="location.href='joinForm.do'">회원가입</button>
 		</c:if>
@@ -356,37 +489,29 @@ header a:active{color: black; text-decoration: none;}
 			<span>${sessionScope.mem_id }님 환영합니다!</span>
 			<button id="top_logout_button" class="top_left_button" onclick="logoutConfirm()">로그아웃</button>
 			<button id="top_my_page_button" class="top_right_button" onclick="myCogiMenuControler()" >회원정보수정</button>
-		</c:if> --%>
-		<!-- <form action="" name="frm" id="frm">
-		 <input type="text" name="sub_name" id="sub_name"> 
-		
-		<input type="button" value="확인" id="submit" onclick="addSub()">   addSub()    sub_insert()
-	</form>
-		 -->
-		
-		
-		
+		</c:if>
 	</div>
-	</div>
-	<div id="header_center">
-		<div id="menu_bar">
-			<table class="menu_bar_table">
-				<tr>
-					<td onclick="">My Note</td>
-				     <td><input type="button" value="내 노트 열기" id="note_Search" onclick="note_Search()" ></td>  					 
-					<td onclick="location.href='schedule.do'">내 시간표</td> 
-					<td onclick="location.href='myNoteView.do'">내 필기 공유</td>
-					<td onclick="location.href='getBoardList.do'">공유 노트</td> 
-				    <td><form action="" name="frm" id="frm">
-		                <input type="text" name="sub_name" id="sub_name" placeholder="추가하고 싶은 과목 입력"> 		
-		                <input type="button" value="확인" id="submit" onclick="addSub()">   <!-- addSub() -->    <!-- sub_insert() -->
-	                    </form></td> 
-				</tr>				
-			</table>
-		</div>
-			</form>
-		</div>
-	</div>
-</div>
-</header>
-</html>
+
+</nav>
+
+<div style="height:29px; background-color: #8C8C8C"> 
+ <ul id ="container">
+    <!-- <li class ="aa"><h4>내 노트 </h4></li>  -->
+    <li class ="aa"><input type="button"  value="내 노트 열기" id="note_Search" onclick="note_Search()" ></li> 
+    <li class ="bb"><form action="" name="frm" id="frm">
+		 <!-- <h4 class ="cc">내 노트 </h4> -->
+		 <input type="text" name="sub_name" id="sub_name" placeholder="추가하고 싶은 과목 입력"> 		
+		 <input type="button" value="확인" id="submit" onclick="addSub()">   
+	    </form>
+    </li> 
+    
+ </ul> 
+</div> 
+
+
+
+
+
+
+
+
