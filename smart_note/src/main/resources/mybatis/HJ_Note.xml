@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="HJ_Note">
+	<resultMap type="Note" id="NoteResult">
+		<result property="note_id" column="note_id" />
+		<result property="sub_id" column="sub_id" />
+		<result property="mem_id" column="mem_id" />
+		<result property="note_title" column="note_title" />
+		<result property="note_contents" column="note_contents" />
+		<result property="note_date" column="note_date" />
+		<result property="note_share" column="note_share" />
+	</resultMap>
+<select id="listAll" parameterType="Note" resultMap="NoteResult">
+      select * from (select rownum rn, a.* from (select * from note
+    	 order by note_id) a) where rn between #{start} and
+    	 #{end}   	
+   </select>
+   
+  <select id="total" resultType="int">
+  	select count(*) from note
+  </select>
+
+  <insert id="insert" parameterType="Note">
+	 insert into note values (#{note_id},#{sub_id},#{mem_id},#{note_title},
+	 #{note_contents},#{note_date},#{note_share}) 
+  </insert>
+  
+ <insert id="insert2" parameterType="Note">
+	 insert into note values (#{note_id},#{sub_id},#{mem_id},#{note_title},
+	 #{note_contents},#{note_date},#{note_share}) 
+  </insert>
+ 
+   <select id="detail" parameterType="int" resultType="Note">
+   	 select * from Note  where note_id = #{note_id}
+  </select>
+ 
+     <update id="HJ_Update" parameterType="Note">
+	 update note set ename=#{ename}, job=#{job}, mgr=#{mgr},
+	    <if test="hiredate!=null">hiredate=#{hiredate},</if>
+	    sal=#{sal}, 
+	    <if test="comm!=null"> 	comm=#{comm},    </if>
+	    deptno=#{deptno} where empno=#{empno}
+   </update>
+ 
+   <!--  <select id="selectManager"  resultMap="EmpResult"> -->
+   <select id="selectManager"  resultType="Note">
+      select * from note where note_id  in (select mgr from note)
+   </select>
+ 
+    <delete id="delete" parameterType="int">
+	    delete from note where note_id=#{note_id}
+   </delete> 
+  
+</mapper>

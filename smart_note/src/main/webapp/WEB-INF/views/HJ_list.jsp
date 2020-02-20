@@ -80,12 +80,6 @@ th {
 				<tr>
 					<h1>메뉴</h1>
 					<br>
-					<input type="button" value="내자료 보기">
-					<br>
-					<br>
-					<input type="button" value="공유자료 보기">
-					<br>
-					<br>
 					<input type="button" value="과목선택"
 						onClick="location.href='myNoteView.do'">
 				</tr>
