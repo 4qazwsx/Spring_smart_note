@@ -146,8 +146,8 @@ $(document).ready(function(){
 		<th>수</th>
 		<th>목</th>
 		<th>금</th>
-		<th>토</th>
-		<th>일</th>
+		<th style="color: blue">토</th>
+		<th style="color: red">일</th>
 	</tr>
 	<c:forEach begin="0" end="9" var="sub">
 		<tr id="schedule_line_${sub}">
@@ -158,10 +158,10 @@ $(document).ready(function(){
 					onmousedown="">
 					<p id="sub_title">${daysSubList[day][sub].getSub_name()}</p>
 					<c:if test="${daysSubList[day][sub] != null }">
-						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">시간표에서 빼기</button>
-						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">필기목록</button>
-						<button onclick="subjectSetting('${daysSubList[day][sub].getSub_id()}')">과목설정</button>
-						<button onclick="location.href='writeNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">새 필기</button>
+						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">시간 빼기</button>
+						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">필기 목록</button>
+						<button onclick="subjectSetting('${daysSubList[day][sub].getSub_id()}')">과목 설정</button>
+						<button onclick="location.href='writeNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">새  필기</button>
 					</c:if>
 				</td>
 		</c:forEach>
