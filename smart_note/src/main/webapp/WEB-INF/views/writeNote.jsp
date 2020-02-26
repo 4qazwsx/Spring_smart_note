@@ -67,9 +67,14 @@ $(document).ready(function(){
 function addFileForm(){
 	if($("#file"+i).val()){//파일이 있으면
 		i++;
+		alert("i->"+i);
 		uploadPic();
-		window.open("//127.0.0.1:8000/polls/")
-		$("#note_uploadFileList").append("<br><input type='file' name='file' id='file"+i+"'>");
+		var ret = window.open("//127.0.0.1:8000/polls/","_blank","width=500,height=600")
+		ret.close();
+		/* var wintimer;
+		clearTimeout(wintimer);
+		wintimer= setTimeout("ret.close()",5000); */
+		$("#note_uploadFileList").append("<br><input type='file' name='file"+i+"' id='file"+i+"'>");
 		$(document).ready(function(){//새로 만든 input 태그에 이벤트 갱신
 			$("input").change(function(){
 				addFileForm();
@@ -87,7 +92,7 @@ function addTag(tag){
 
 function uploadPic(){
 	var form = new FormData(document.getElementById('uploadForm'));
-	alert()
+/* 	alert() */
 	$.ajax({
 		url: "upload.do",
 		data: form,
@@ -96,7 +101,7 @@ function uploadPic(){
 		contentType: false,
 		type: 'POST',
 		success: function(response){
-			alert("success");
+			/* alert("success"); */
 			console.log(response);
 			/* $(function(){
 				$.ajax({
@@ -171,7 +176,7 @@ function uploadPic(){
 		<form action="/upload.do" enctype="multipart/form-data" method="post" id="uploadForm">
 		<tr>
 			<td id="note_uploadFileList">
-			<input type="file" name="file" id="file1" required="required">
+			<input type="file" name="file1" id="file1" required="required">
 			</td>
 		</tr>
 		</form>

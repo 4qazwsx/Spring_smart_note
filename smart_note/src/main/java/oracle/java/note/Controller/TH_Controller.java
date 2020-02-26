@@ -66,9 +66,9 @@ public class TH_Controller {
 
 			// 임시 파일을 복사한다.
 			for (int i = 0; i < mpf.size(); i++) {
-
+				System.out.println("mpf.size()"+mpf.size()+"     i->"+i);
 				File file = new File(folderPATH + mpf.get(i).getOriginalFilename());
-				System.out.println("파일이름2" + mpf.get(i).getOriginalFilename());
+				System.out.println("파일이름2->" + mpf.get(i).getOriginalFilename());
 				logger.info(file.getAbsolutePath());
 				mpf.get(i).transferTo(file);
 				model.addObject("filename", mpf.get(i).getOriginalFilename());
