@@ -159,7 +159,7 @@ $(document).ready(function(){
 					<p id="sub_title">${daysSubList[day][sub].getSub_name()}</p>
 					<c:if test="${daysSubList[day][sub] != null }">
 						<button onclick="location.href='deleteSubjectTime.do?sub_id=${daysSubList[day][sub].getSub_id()}&time=${sub }&day=${day }'">시간 빼기</button>
-						<button onclick="location.href='myNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">필기 목록</button>
+						<button onclick="location.href='noteList.do?subName=${daysSubList[day][sub].getSub_name()}'">필기 목록</button>
 						<button onclick="subjectSetting('${daysSubList[day][sub].getSub_id()}')">과목 설정</button>
 						<button onclick="location.href='writeNote.do?sub_id=${daysSubList[day][sub].getSub_id()}'">새  필기</button>
 					</c:if>

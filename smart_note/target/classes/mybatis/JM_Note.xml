@@ -12,4 +12,16 @@
 		INSERT INTO subject_note_mapping VALUES (#{sub_id}, #{mem_id}, NOTE_ID.CURRVAL)
 	</insert>
 
+	<select id="jm_my_note_list" parameterType="Subject" resultType="Note">
+		SELECT * FROM NOTE WHERE note_id IN (
+		      SELECT note_id FROM SUBJECT_NOTE_MAPPING WHERE mem_id=#{mem_id} AND sub_id=(
+		            SELECT sub_id FROM SUBJECT WHERE sub_name=#{sub_name} AND mem_id=#{mem_id}
+		      )
+		)
+	</select>
+	
+	<select id="jm_note_select" parameterType="java.lang.String" resultType="Note">
+		SELECT * FROM NOTE WHERE note_id = #{note_id}
+	</select>
+
 </mapper>

@@ -132,7 +132,7 @@ function addContent(){
 		<form action="noteSave.do" enctype="multipart/form-data" method="post" id="noteForm">
 		
 		<tr id="note_title">
-			<td><input type="text" placeholder="제목" name="note_title" id="note_titleInput"></td>
+			<td><input type="text" placeholder="제목" name="note_title" id="note_titleInput" value="${note.getNote_title() }"></td>
 		</tr>
 		
 		<tr>
