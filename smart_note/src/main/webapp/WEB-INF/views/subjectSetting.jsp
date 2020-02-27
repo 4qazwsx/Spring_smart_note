@@ -10,23 +10,35 @@
 function subjectSettingSubmit(){
 	var params = $("#subjectSettingForm").serialize();
 	$.ajax({
-		url : "newSubject.do",
+		url : "changeSubjectSetting.do",
 		data : params,
 		success : function(s){
 			opener.parent.location.reload();
 			window.close();
 		}
-		
+	})
+}
+function delectSubjectSubmit(){
+	var params = $("#subjectSettingForm").serialize();
+	$.ajax({
+		url : "delectSubject.do",
+		data : params,
+		success : function(s){
+			opener.parent.location.reload();
+			window.close();
+		}
 	})
 }
 </script>
 </head>
 <body>
 <h2>${subject.getSub_name()}</h2>
-<form id="subjectSettingForm">
+<form id="subjectSettingForm" action="subjectSettingSubmit()">
+<input hidden="hidden"/>
+<input type="hidden" name="sub_id" value="${subject.getSub_id() }">
 <p>과목 색 <input type="text" name="sub_color" value="${subject.getSub_color() }"></p>
 </form>
 <button onclick="subjectSettingSubmit()">확인</button>
-<button onclick="">과목 삭제</button>
+<button onclick="delectSubjectSubmit()">과목 삭제</button>
 </body>
 </html>

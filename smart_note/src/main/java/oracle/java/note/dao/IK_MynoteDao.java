@@ -10,6 +10,7 @@ public interface IK_MynoteDao {
 	void deleteFavSubject(String mem_id, String sub_id, String note_id );
 	int total();
 	List<String> list(String sub_name);
-	String confirmSub();
+	
 	List<Subject> select();
+	Subject confirm(String sub_name);
 }

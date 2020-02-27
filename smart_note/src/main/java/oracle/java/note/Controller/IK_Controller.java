@@ -20,12 +20,12 @@ public class IK_Controller {
 	@Autowired
 	private IK_MynoteService ms;
 
-	@RequestMapping(value = "list")
+	/*@RequestMapping(value = "list")
 	public String list(String sub_name, Model model) {
 		List<String> list = ms.list(sub_name);
 		model.addAttribute("list", list);
 		return "note_Search";
-	}
+	}*/
 
 	@RequestMapping(value = "myNoteView")
 	public String myNoteView() {

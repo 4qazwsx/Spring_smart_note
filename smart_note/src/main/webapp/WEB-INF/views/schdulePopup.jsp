@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 function addSchuleTimeSubmit(){
-	var params = $("#addSchduleTimeFform").serialize();
+	var params = $("#addSchduleTimeForm").serialize();
 	$.ajax({
 		url : "addSchduleTime.do",
 		data : params,
@@ -25,9 +25,17 @@ function newSubjectSubmit(){
 	$.ajax({
 		url : "newSubject.do",
 		data : params,
-		success : function(s){
-			opener.parent.location.reload();
-			window.close();
+		success : function(sub_id){
+			//새 과목을 DB에 추가 후 추가한 과목을 시간표에 추가
+			params = 'day=${param.day }&start_time=${param.start_time }&end_time=${param.end_time }&sub_id='+sub_id
+			$.ajax({
+				url : "addSchduleTime.do",
+				data : params,
+				success : function(s){
+					opener.parent.location.reload();
+					window.close();
+				}
+			})
 		}
 		
 	})
@@ -50,11 +58,12 @@ function newSubjectSubmit(){
 요일 ${param.start_time+1 }교시에서 ${param.end_time+1 }교시에 추가할 과목 선택</span>
 <br>
 
-<form action="addSchduleTime.do" id="addSchduleTimeFform">
+<form id="addSchduleTimeForm">
+	<input hidden="hidden"/>
 	<input type="hidden" name="day" value="${param.day }">
 	<input type="hidden" name="start_time" value="${param.start_time }">
 	<input type="hidden" name="end_time" value="${param.end_time }">
-	<select name="sub_id">
+	<select name="sub_id" id="subId">
 		<c:forEach items="${subList }" var="sub">
 			<option value="${sub.getSub_id() }">${sub.getSub_name() }</option>
 		</c:forEach>
@@ -68,8 +77,9 @@ function newSubjectSubmit(){
 <br>
 <br>
 
-<span>새로운 과목 만들기</span>
-<form action="newSubject.do" id="newSubjectForm">
+<span>새로운 과목 만들어 추가</span>
+<form id="newSubjectForm">
+	<input hidden="hidden"/>
 	<input type="text" id="subName" name="sub_name" placeholder="과목명...">
 	<br>
 	<textarea rows="5" cols="20" id="subDescription" name="sub_description" placeholder="과목 설명..."></textarea>
