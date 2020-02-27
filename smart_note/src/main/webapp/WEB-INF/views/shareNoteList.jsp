@@ -61,6 +61,7 @@ crossorigin="anonymous">
 
 
 <body>
+<%@ include file="header.jsp" %>
 <article>
 	<div class="container">
 		<div class="table-responsive">
