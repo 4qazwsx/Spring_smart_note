@@ -22,7 +22,7 @@ public class YJ_MembersDaoImpl implements YJ_MembersDao {
 	}
 
 	@Override
-	public YJ_Members confirm1(String mem_id) {
+	public int confirm1(String mem_id) {
 		// TODO Auto-generated method stub
 		return session.selectOne("YJ_confirm",mem_id);
 	}
@@ -87,5 +87,11 @@ public class YJ_MembersDaoImpl implements YJ_MembersDao {
 		}
 		return member;
 		}
+
+	@Override
+	public int checkemail(String mem_email) {
+		// TODO Auto-generated method stub
+		return session.selectOne("YJ_confirm2",mem_email);
+	}
 
 	}

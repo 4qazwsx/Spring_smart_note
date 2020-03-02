@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import oracle.java.note.model.Note;
 import oracle.java.note.model.Subject;
+import oracle.java.note.model.Subject_Note_Mapping;
+import oracle.java.note.service.JM_NoteService;
 import oracle.java.note.service.JM_ScheduleService;
 
 @Controller
@@ -19,6 +22,9 @@ public class JM_Controller {
 	
 	@Autowired
 	private JM_ScheduleService ScheculeServ;
+	
+	@Autowired
+	private JM_NoteService NoteServ;
 
 	@RequestMapping(value="schedule")
 	public String schedule(Model model, HttpServletRequest request) {
@@ -330,6 +336,71 @@ public class JM_Controller {
 		}
 		
 		return "writeNote";
+	}
+	
+	//필기작성 컨트롤러
+		@RequestMapping(value="updateNote")
+		public String updateNote(Model model, String note_id) {
+			
+			if(note_id == null) {
+				System.out.println("노트 아이디 정보가 없습니다.");
+			}
+			
+			Note note = NoteServ.selectNote(note_id);
+			
+			System.out.println("note.getNote_title()->"+note.getNote_title());
+			
+			
+			model.addAttribute("note", note);
+			
+			return "noteContentView";
+		}
+	
+	//노트작성 페이지 컨트롤러
+	@RequestMapping(value="noteSave")
+	public String noteSave(HttpServletRequest request, String note_title, String note_contents, String sub_id) {
+		
+		HttpSession session = request.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
+		
+		Note note = new Note();
+		Subject_Note_Mapping subNoteMapping = new Subject_Note_Mapping();
+		
+		note.setNote_title(note_title);
+		note.setNote_contents(note_contents);
+		
+		subNoteMapping.setMem_id(mem_id);
+		subNoteMapping.setSub_id(sub_id);
+		
+		System.out.println(note_title + note_contents + mem_id + sub_id);
+		
+		NoteServ.insertNote(note, subNoteMapping);
+		
+		return "myNoteView";
+	}
+	
+	//노트 리스트 페이지
+	@RequestMapping(value="noteList")
+	public String noteList(Model model, HttpServletRequest request, String subName) {
+		
+		HttpSession session = request.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
+		
+		System.out.println("subName-> "+subName);
+		
+		Subject sub = new Subject();
+		
+		sub.setMem_id(mem_id);
+		sub.setSub_name(subName);
+		List<Note> noteList = NoteServ.selectNote(sub); 
+		
+		for(int i = 0 ; i < noteList.size() ; i++) {
+			System.out.println(noteList.get(i).getNote_title());
+		}
+		
+		model.addAttribute("noteList", noteList);
+		
+		return "myNoteList";
 	}
 	
 	//String[]을 받아서 ,를 찍어 String으로 반환해주는 메소드

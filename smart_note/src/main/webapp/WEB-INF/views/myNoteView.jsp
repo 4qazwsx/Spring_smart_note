@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="header.jsp"%>
+<%@ include file="myNote_header2.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
@@ -21,16 +21,13 @@
 
 <script id="dept-template" type="text/x-handlebars-template">
 <table id="content" class="hide">
-    <thead>
-       
-        <th><h2>내 노트<h2></th> 
-       
+    <thead>    
     </thead> 
-    <tbody> 
+    <tbody class="list_body"> 
          {{#subject}}
         <tr>
            
-            <td><a href="" class="sub_button" id="sub_button">{{sub_name}}</a></td> 
+            <td><a class="sub_button"  value="{{sub_name}}">{{sub_name}}</a></td> 
            
         </tr> 
         {{/subject}}
@@ -41,18 +38,50 @@
 <script type="text/javascript">	
 
 
-  function note_Search(){
+$(document).ready(function(){
+
+	 var furuitSrc= "";
+
+	 $(document).on("click",".sub_button",function(){
+
+			 var furuitSrc= $(this).attr("value");
+
+	 		alert("내노트->"+furuitSrc); 
+	 		window.location.href="<%=context%>/noteList.do?subName="+furuitSrc;
+	 });
+
+ });
+ 
+
+ 
+function note_Search(){
 	str    = "";
 	str2   = "";
-	 $('#note_Search').unbind('click');
-	console.log("getListDept Run");
-	alert("dept-template getListDept Run->");  
+	
+	
+	$('#note_Search').unbind('click');
+	
+	 console.log("getListDept Run");
+	/* alert("dept-template getListDept Run->"); */  
+	 var result = '${mem_id}';
+	 var isEmpty = (result == "" || result == null || result == undefined || ( result != null && typeof result == "object" && !Object.keys(result).length ));
+	   if(isEmpty){
+		  alert("로그인 후 사용 가능합니다");
+	      return  window.open("loginForm2.do"); ;
+				 
+	   }else{ 	 
+		  alert(result+"님의 노트를 검색 합니다");
+	   } 
+	
+	
+	
+	
 	$.ajax({
 		url:"<%=context%>/sendVO3.do",
 		dataType:'json',
 		success:function(data){
 			var jsondata = JSON.stringify(data);
-	        alert("jsondata->"+jsondata);
+	        /* alert("jsondata->"+jsondata);  */
 			$('#Dept_list').append(jsondata);  
 			
 			//핸들바 템플릿 가져오기
@@ -72,60 +101,34 @@
 			 /* document.getElementById("note_Search").value = '내 노트 닫기'; */
 
 			 var ns = document.getElementById("note_Search").value;
-			 alert(ns)
+			 /* alert(ns) */
 			
-			 if(ns == '내 노트 검색'){
+			 if(ns == '내 노트 열기'){
 				 document.getElementById("note_Search").value = '내 노트 닫기';
 				 
 				 document.getElementById('note_Search').onclick = function close_note(){
-					    alert("닫겠습니까?")
+					   
+				        alert("닫겠습니까?")
 				    	$("#content").remove();
-				 document.getElementById("note_Search").value = '내 노트 검색';
+				 document.getElementById("note_Search").value = '내 노트 열기';
 				 
 				 document.getElementById('note_Search').onclick = function open_note(){
-					   alert("열겠습니까")	 
+					  /*  alert("열겠습니까") */	 
 					   note_Search();
 					 }
 				 }
 
 			 }else{
-				  document.getElementById("note_Search").value = '내 노트 검색';
+				 
+				
+				 document.getElementById("note_Search").value = '내 노트 열기';
 			 }
-
+			
+			 
 		}
 	});
-
+	
 }
-
-
-	/*  if($('#note_Search').text()=="내 노트 검색"){
-		 $('#note_Search').text("내 노트 닫기"); 
-		
-	    
-	 }
-	
-	else{
-		$('#note_Search').text("내 노트 검색");
-	}   */
-	
-	 /* $('#note_Search').click(function () {
-		 alert("hahahhah")
-		 close_note();
-		 $('#note_Search').text("내 노트 검색");
-		
-	    	});
-	
-	 $('#note_Search').click(function () {
-		return; 
-		
-		
-	    	}); */
-  
-  
-	    	
-	    	
-	    	
-	    	
 	    	
 	    	
   
@@ -133,169 +136,135 @@
 
 
 function addSub(){ 
-		var tc = new Array(); 
+	    var tc = new Array(); 
 		var html = ''; 
-		
-		var sub_name = $('#sub_name').val();
-		
-
-		 if (!frm.sub_name.value ) {
+	
+		if (!frm.sub_name.value ) {
 			alert("과목 입력하세요")
 			return false
 		} 
-		
+
+		 var result = '${mem_id}';
+		 alert("result--->"+result);
 		 
+		 /* var isEmpty = function(value){ if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){ return true }else{ return false } }; */
+		
+		 var isEmpty = (result == "" || result == null || result == undefined || ( result != null && typeof result == "object" && !Object.keys(result).length ));
+		 if(isEmpty){
+     		
+			 alert("로그인 후 사용 가능합니다");
+     		 
+     		return  window.open("loginForm2.do"); 
+     		
+     	 }else{ 
+     		 
+     		var sub_name = $('#sub_name').val();
+     		console.log("aaa");
+     		
+     		
+     		$.ajax({
+     			url:"<%=context%>/confirm.do",
+     			data: {"sub_name":$('#sub_name').val()},
+     			dataType:'json',
+      			error:function(error){
+      				
+      			},
+     			success:function(total){
+     				 if(total > 0){ 
+     					alert("이미 같은 과목이 있습니다!");
+     				    $("#frm")[0].reset();} 
+     				else{ 
+     					alert("성공!");
+     		     		alert(sub_name+"과목을 추가 합니다");      		     		
+     		     		html += '<td>';  
+     		    		html += '<a  class="sub_button" id= "kkk" value="'+sub_name+'">'+sub_name+'</a>'+
+     		    		'<input type="button" value="삭제"  class="del_button" onclick="delSub('+"'"+sub_name+"'"+')">'; 
+     		    		html += '</td>'; 
+     		    		
+     		    		$("#dynamicTable").append(html); 
+     		    		$("#sub_name").val('');  
+     		    		 
+     		    		
+     				
+     				
+     				 }
+     				
+     			}});
+     		
+     		
+     	  } 
+		 
+}
+
+
+
+function delSub(sub_name){ 
+
+    alert("정말 삭제 하시겠습니까?");
 	
-		 
-		 
-		 
-		 
-		 
-		
-     	alert(sub_name+"를 추가 합니다"); 
-		
-		
-		
-		html += '<tr>'; 
-		html += '<td>'+'<a href="" class="sub_button">'+sub_name+'</a>'+
-		'<input type="button" value="삭제"  class="del_button" onclick="delSub()">'+'</td>'; 
-		html += '</tr>';
-		
-		$("#dynamicTable").append(html); 
-		$("#sub_name").val(''); 
-		}
+    $("#dynamicTable").on("click", ".del_button", function () {
+        $(this).parent().remove();
 
-
-function delSub(){ 
-	 
-	
-
-     alert("정말 삭제 하시겠습니까?")
-	
-  /* $('#dynamicTable  tbody tr:last').remove();   */
-		
-	
-     $("#dynamicTable").on("click", ".del_button", function () {
-             $(this).parent().parent().remove();
-
-    	});
-
+	});
+    
+    
+    alert("삭제 sub_name--->"+sub_name);
+    
+    $.ajax({
+			url:"<%=context%>/sub_delete.do",
+			data: {"sub_name":sub_name},
+			dataType:'json',
+			error:function(error){
+				
+			},
+			success:function(data){
+				alert("삭제성공!")
+			}});
+    
+    
+    
+    
+                  
+ 
 }	
 		
  
  
-function db_sub(){
-	str    = "";
-	str2   = "";
-	console.log("getListDept Run");
-	alert("dept-template getListDept Run->");  
-	$.ajax({
-		url:"<%=context%>/sendVO3.do",
-		dataType:'json',
-		success:function(data){
-			var jsondata = JSON.stringify(data);
-			alert(jsondata);
-			
-			
-			
-			
-			
-			/* for(var ele in jsondata){ 
-				 
-					console.log(jsondata[ele]); } 
- */
-			
- 
-			var i=[{"t_no":"120","t_content":"test11","t_writer":"여성게","obtain":"0","t_date":"2018-         04-27"},
-	            {"t_no":"119","t_content":"test10","t_writer":"여성게","obtain":"0","t_date":"2018-04-27"},
-	            {"t_no":"118","t_content":"test9","t_writer":"여성게","obtain":"0","t_date":"2018-04-27"},
-	            {"t_no":"117","t_content":"test8","t_writer":"여성게","obtain":"0","t_date":"2018-04-27"},
-	            {"t_no":"114","t_content":"test7","t_writer":"여성게","obtain":"0","t_date":"2018-04-27"},
-	            {"t_no":"113","t_content":"test6","t_writer":"여성게","obtain":"0","t_date":"2018-04-26"},
-	            {"t_no":"110","t_content":"hi","t_writer":"여성게","obtain":"0","t_date":"2018-04-26"},
-	            {"t_no":"109","t_content":"test5","t_writer":"여성게","obtain":"0","t_date":"2018-04-26"},
-	            {"t_no":"107","t_content":"test4","t_writer":"여성게","obtain":"0","t_date":"2018-04-26"},
-	            {"t_no":"76","t_content":"test3","t_writer":"여성게","obtain":"1","t_date":"2018-04-25"},
-	            {"t_no":"75","t_content":"test2","t_writer":"여성게","obtain":"0","t_date":"2018-04-25"},
-	            {"t_no":"74","t_content":"test1","t_writer":"여성게","obtain":"1","t_date":"2018-04-25"},
-	            {"t_no":"72","t_content":"hello","t_writer":"여성게","obtain":"0","t_date":"2018-04-25"},
-	            {"t_no":"49","t_content":"spring create","t_writer":"여성게","obtain":"1","t_date":"2018-04-25"},
-	            {"t_no":"29","t_content":"도전과제","t_writer":"여성게","obtain":"1","t_date":"2018-04-25"},
-	            {"t_no":"28","t_content":"서블릿공부","t_writer":"여성게","obtain":"0","t_date":"2018-04-25"},
-	            {"t_no":"8","t_content":"헬로우","t_writer":"여성게","obtain":"1","t_date":"2018-04-24"},
-	            {"t_no":"7","t_content":"안녕하세요.","t_writer":"여성게","obtain":"0","t_date":"2018-04-24"},
-	            {"t_no":"5","t_content":"오늘할일4","t_writer":"여성게","obtain":"1","t_date":"2018-04-24"},
-	            {"t_no":"1","t_content":"오늘할일1","t_writer":"여성게","obtain":"1","t_date":"2018-04-24"}];
-	    
-			for(var ele in i){
-		        /*for(var ele2 in i[ele]){
-		            console.log(i[ele][ele2]);
-		        } */
-		        console.log(i[ele].t_no);
-		        console.log(i[ele].t_content);
-		        console.log(i[ele].t_writer);
-		        console.log(i[ele].obtain);
-		        console.log(i[ele].t_date);
-		    }
-
-
-		
-
-
-	
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
 
-		
-			
-			
-			
-			/* $.each(jsondata,function(idx,row){
-        	   if(jsondata[idx].sub_name == "국어"){
-        		   return jsondata[idx];
-        	   }
-           return"";
-           }); */
-			
-          
-           
-           
-		}
-			
-			
-			/* for(var ele in jsondata){ 
-				console.log(jsondata[ele].mem_id); } */
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ function noRefresh()
+ {
+     /* CTRL + N키 막음. */
+     if ((event.keyCode == 78) && (event.ctrlKey == true))
+     {
+         event.keyCode = 0;
+         return false;
+     }
+     /* F5 번키 막음. */
+     if(event.keyCode == 116)
+     {
+         event.keyCode = 0;
+         return false;
+     }
+ }
+document.onkeydown = noRefresh;
 
-			
-	});
 
-	
-}
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-	
 </script>
 
 <style type="text/css">
@@ -304,7 +273,7 @@ function db_sub(){
 
     width:100px;
 
-    background-color: #FAE0D4;
+    background-color: #B2CCFF;
 
     border: none;
 
@@ -318,7 +287,7 @@ function db_sub(){
 
     display: inline-block;
 
-    font-size: 15px;
+    font-size: 17px;
 
     margin: 4px;
 
@@ -332,6 +301,94 @@ function db_sub(){
 }
 
 
+.del_button {
+
+    width:20px;
+
+    background-color: #E8D9FF;
+
+    border: none;
+
+    color:#000000; 
+
+    padding: 5px 0;
+
+    text-align: center;
+
+    text-decoration: none; 
+
+    display: inline-block;
+
+    font-size: 10px;
+
+    margin: 4px;
+
+    cursor: pointer;
+
+    /* border-radius:10px; */
+}
+
+#content {
+height: 10%;  
+
+
+
+}
+
+.list_body{
+position:absolute;
+
+top:15%;
+
+left:265px;
+
+}
+
+.my{
+position:absolute;
+
+top:13%;
+
+left:95px;
+
+}
+
+#fav{
+position:absolute;
+
+top:7%; 
+
+right:35%;
+
+color:#FFFFFF;
+
+
+
+}
+
+
+#fav_tab{
+
+
+top:40%;
+
+right:30px;
+
+}
+
+#dynamicTable{
+
+position:absolute;
+
+top:15%;
+
+left:40%;
+
+}
+
+
+
+
 
 
 </style>
@@ -342,37 +399,35 @@ function db_sub(){
 </head>
 
 <body>
+<!-- <h3 class="my">내 노트 </h3>  -->
+ <div id="Dept_list3"></div>  
 	
-
-	<div>
+	<div id="fav_tab">
 		<table style="border: 1px;" id="dynamicTable">
 			<thead>
 				<tr>
-					<th>선호 과목</th>
-                    
+					<th></th> 
 				</tr>
-			</thead>
-			<tbody>
-			</tbody>
+			</thead>	
 		</table>
 	</div>
 
 
 
+<h5 id = "fav">추가과목</h5>
 
 
 
 
-
-	<h2>과목추가</h2>
-	<form action="" name="frm">
-		<input type="text" name="sub_name" id="sub_name">
+	<!-- <h2>과목추가</h2> -->
+	<!-- <form action="" name="frm" id="frm">
+		 <input type="text" name="sub_name" id="sub_name"> 
 		
-		<input type="button" value="확인" id="submit" onclick="addSub()">   <!-- addSub() -->
-	</form>
+		<input type="button" value="확인" id="submit" onclick="addSub()">   addSub()    sub_insert()
+	</form> -->
 
 	
-	<input type="button" value="내 노트 검색" id="note_Search" onclick="note_Search()">
+	<!-- <input type="button" value="내 노트 검색"   onclick="note_Search()" >   -->             <!--   id="note_Search" -->
    <!--  <button id="note_Search" >내 노트 검색</button> -->
   <!--  <button id="close_note"   ">내 노트 닫기</button> -->
 
@@ -383,11 +438,11 @@ function db_sub(){
 
 
 	
-	<p>Dept_list:
-	<div id="Dept_list"></div>
+	<!-- <p>Dept_list: -->
+	<!-- <div id="Dept_list"></div> -->
 
 	
-	<div id="Dept_list3"></div>
+	<!-- <div id="Dept_list3"></div> -->
 
 
 	<p>

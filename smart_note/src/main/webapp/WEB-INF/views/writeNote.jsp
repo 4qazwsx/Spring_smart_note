@@ -31,11 +31,14 @@
 #note_contentInput{
 	height: 100%;
 	width: 100%;
-	border: 1px solid black;
+	border: 1px solid #8C8C8C;
 }
 
 bold{
 	font-weight: bold;
+}
+brightPen{
+	background-color: yellow;
 }
 </style>
 <script type="<c:url value="/js/jquery-3.1.0.min.js"/>"></script>
@@ -43,25 +46,18 @@ bold{
 <script type="text/javascript">
 
 var i = 1;
-var selText = document.getSelection();
+var selText = window.getSelection();
 
 $(document).ready(function(){
-	$("input").change(function(){
+	$("input").change(function(){//input 내용이 바뀔때마다
 		addFileForm();
 	});
+	/* $("div").change(function(){
+		addContent();
+	})
 	$("#note_contentInput").mouseup(function(a){
-		//alert("selText->"+selText);
-		//alert("selText.ancherNode->"+selText.ancherNode);
-		//alert("selText.anchorOffset->"+selText.anchorOffset);
-		//alert("selText.focusNode->"+selText.focusNode);
-		//alert("selText.focusOffset->"+selText.focusOffset);
-		//alert("selText.isCollapsed->"+selText.isCollapsed);
-		//alert("selText.rangeCount->"+selText.rangeCount);
-		//alert("document.selection.createRange().text->"+document.selection.createRange().text);
-	});
-	$("#note_contentInput").append("<h1>asd</h1>");
-	$("#note_contentInput").append("<h2><bold>asdasd</bold></h2>");
-	$("#note_contentInput").append("asdasdasd");
+		
+	}); */
 })
 
 function addFileForm(){
@@ -83,11 +79,42 @@ function addFileForm(){
 	}
 }
 
-function addTag(tag){
-	if(selText.isCollapsed == 0){//드래그한 부분이 있을 때
-		selText.val() = "1111111"
-		$("#note_contentInput").append("<"+tag+">asdasd</"+tag+">");	
+function sameTagSearch(tag){
+	var result = 0;//0은 없음 1은 있음
+	
+	if(parent_node.nodeName == tag.toUpperCase()){
+		result = 1;
 	}
+	
+	return result;
+}
+
+function tagAction(tag){//추가할 태그의 이름을 매개변수로 받는 함수
+	if(selText.isCollapsed == 0){//드래그한 부분이 있을 때만 실행
+		
+		const selTextRange = selText.getRangeAt(0);//선택 영역을 Range오브젝트로 선언
+		const parent_node = selTextRange.commonAncestorContainer.parentNode;//선택 영역의 부모 노드
+		const child_nodes = selTextRange.commonAncestorContainer.childNodes;//선택 영역의 자식 리스트
+		
+		if(parent_node.nodeName == tag.toUpperCase()){//이미 같은 태그가 적용된 곳일 경우
+			alert("tag 중복 감지");
+			for(var i = 0 ; i < child_nodes.length ; i++){
+				alert(child_nodes.item(i).nodeName);
+			}
+			
+		}else{//해당 태그가 적용되지 않은 영역일 경우
+			const newNode = document.createElement(tag);//새로운 노드를 만들어 태그 속성을 추가
+			for(var i = 0 ; i < child_nodes.length ; i++){
+				alert(child_nodes.item(i).nodeName);
+			}
+			newNode.appendChild(selTextRange.extractContents());//노드에 기존의 내용을 이동
+			selTextRange.insertNode(newNode);//선택영역에 노드를 삽입
+		}
+	}
+}
+
+function addContent(){
+	$("#note_contents_value").val($("#note_contentInput").html());
 }
 
 function uploadPic(){
@@ -163,15 +190,27 @@ function uploadPic(){
 		
 		<tr id="note_tools">
 			<td>
-				<button onclick="addTag('bold')">볼드</button>
-				<button onclick="addTag('brightPen')">형광펜</button>
+				<button onclick="tagAction('bold')">볼드</button>
+				<button onclick="tagAction('brightPen')">형광펜</button>
+				<button onclick="tagAction('h1')">h1</button>
+				<button onclick="tagAction('h2')">h2</button>
+				<button onclick="tagAction('h3')">h3</button>
 			</td>
 		</tr>
 		
+<<<<<<< HEAD
+=======
+		<form action="noteSave.do" enctype="multipart/form-data" method="post" id="noteForm">
+>>>>>>> refs/remotes/origin/master
 		
+<<<<<<< HEAD
 <!-- 		<form action="" method="post" id="noteForm">
  -->		<tr id="note_title">
 			<td><input type="text" placeholder="제목" name="note_title" id="note_titleInput"></td>
+=======
+		<tr id="note_title">
+			<td><input type="text" placeholder="제목" name="note_title" id="note_titleInput" value="${note.getNote_title() }"></td>
+>>>>>>> refs/remotes/origin/master
 		</tr>
 		<form action="/upload.do" enctype="multipart/form-data" method="post" id="uploadForm">
 		<tr>
@@ -186,13 +225,14 @@ function uploadPic(){
 		</td>
 		</tr>
 		<tr id="note_contents">
-			<td>
-			<div contentEditable="true" id="note_contentInput"></div>
-			</td>
-			<!-- <td><textarea placeholder="내용" name="note_content" id="note_contentInput" style="resize:none"></textarea></td> -->
+			<td><div contentEditable="true" id="note_contentInput"></div></td>
+			<td><input type="hidden" name="note_contents" id="note_contents_value"></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="저장"></td>
+			<td>
+				<input type="hidden" name="sub_id" value="${param.sub_id }">
+				<input onclick="addContent()" type="submit" value="저장">
+			</td>
 		</tr>
 <!-- 		</form>
  -->		

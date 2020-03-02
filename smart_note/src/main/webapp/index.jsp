@@ -5,20 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
+</head>l
 <body>
 <%
 //response.sendRedirect("getshareNoteList.do");
-response.sendRedirect("schedule.do");
-//response.sendRedirect("beforeMyNote.do");
-//response.sendRedirect("addSubForm.do");
+//response.sendRedirect("schedule.do");
 //response.sendRedirect("list.do");
-//response.sendRedirect("addFavSub.do");
-//response.sendRedirect("myNoteView.do");
+response.sendRedirect("myNoteView.do");
 //response.sendRedirect("note_Search.do");
 //response.sendRedirect("getBoardList.do");
 //response.sendRedirect("HJ_Main.do");
+<<<<<<< HEAD
 //response.sendRedirect("HJ_Main.do");
+=======
+//response.sendRedirect("loginForm2.do");
+>>>>>>> refs/remotes/origin/master
 %>
 </body>
 </html>
